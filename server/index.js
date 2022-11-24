@@ -1,7 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const { userInfo } = require('os');
 
 const port = 8000;
 
