@@ -2,6 +2,9 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const { updateUserByEmail } = require('./handlers/users/updateUserByEmail');
+const { getAllModules } = require('./handlers/modules/getAllModules');
+const { getModulesTitles } = require('./handlers/modules/getModulesTitles');
+const { getModulesbyId } = require('./handlers/modules/getModulesById');
 
 const port = 8000;
 
@@ -20,6 +23,11 @@ express()
 
 	// user endpoints
 	.patch('/user/:email', updateUserByEmail)
+
+	// modules endpoints
+	.get('/modules', getAllModules)
+	.get('/modules/:_id', getModulesbyId)
+	.get('/moduletitles', getModulesTitles)
 
 	.listen(port, () => {
 		console.log(`Example app listening on port ${port}`);

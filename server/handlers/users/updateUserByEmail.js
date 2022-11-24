@@ -19,14 +19,13 @@ const updateUserByEmail = async (req, res) => {
 	try {
 		await client.connect();
 		const db = client.db('ailleursConseil');
+		console.log('connected!');
 
 		const queryObj = { email };
 		const updateObj = { $set: req.body };
 		const updateOptions = { new: true };
 
 		const findRes = await db.collection('users').findOne(queryObj);
-
-		console.log(findRes);
 		// if found, send response back to frontend
 		if (findRes) {
 			const updateRes = await db
@@ -48,6 +47,7 @@ const updateUserByEmail = async (req, res) => {
 		});
 	} finally {
 		await client.close();
+		console.log('disconnected!');
 	}
 };
 
