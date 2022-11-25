@@ -24,12 +24,8 @@ const getModulesTitles = async (req, res) => {
 
 		const result = await db.collection('modules').find().toArray();
 
-		console.log(result, 'RESULT');
-
 		// target titre
 		let titre = result.map(({ titre }) => titre);
-
-		console.log(titre, 'TITRE');
 
 		// response
 		if (result.length <= 0) {
