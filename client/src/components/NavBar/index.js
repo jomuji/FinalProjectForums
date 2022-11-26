@@ -78,9 +78,7 @@ const NavBar = () => {
 		} else {
 			return (
 				<User onClick={() => loginWithRedirect()}>
-					<UserIcon>
-						<MdAccountCircle />
-					</UserIcon>
+					<MdAccountCircle />
 				</User>
 			);
 		}
@@ -101,7 +99,6 @@ const NavBar = () => {
 					}}
 				/>
 			) : (
-				/* 			{show && ( */
 				<NavWrapper style={{ display: { show } }}>
 					<Logo>
 						<Link to='/'>
@@ -164,6 +161,7 @@ export default NavBar;
 
 const NavWrapper = styled.div`
 	margin: 0px;
+	margin-bottom: 2em;
 	padding: 1em;
 	display: flex;
 	flex-direction: row;
@@ -173,6 +171,12 @@ const NavWrapper = styled.div`
 	top: 0; */
 	transition-timing-function: ease-in;
 	transition: 0.5s;
+
+	a {
+		&:hover {
+			color: var(--red);
+		}
+	}
 `;
 
 const SecondSection = styled.section`
@@ -203,7 +207,7 @@ const Nav = styled.nav`
 	margin-bottom: 1em;
 `;
 
-const Page = styled.p`
+const Page = styled.a`
 	font-weight: 700;
 	color: var(--darkgrey);
 `;
@@ -218,22 +222,18 @@ const ModuleNav = styled.a`
 	margin-bottom: 1em;
 `;
 
-const User = styled.div`
+const User = styled.a`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	font-size: 50px;
+	line-height: 0.5;
+	align-items: left;
 	span {
 		font-size: 0.6em;
 	}
 `;
-const UserIcon = styled.div`
-	font-size: 50px;
-	line-height: 0.5;
-	align-items: left;
-	&:hover {
-		color: var(--red);
-	}
-`;
+
 const UserPicture = styled.div`
 	img {
 		width: 50px;

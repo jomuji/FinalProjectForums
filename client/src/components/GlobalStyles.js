@@ -69,29 +69,33 @@ export default createGlobalStyle`
       content: none;
   }
 
-h1,
+h1 {
+  font-size: 2em;
+  color: var(--darkgrey);
+}
 h2,
 h3,
 label,
 button {
+  color: #FFFAEA;
+  font-weight: 700;
   border: none;
   padding: 0px;
-  background-color: var(--beige);
   cursor: pointer;
-  &:hover {
-		color: red;
-	}
+  border-radius: 80px;
+  background-color: var(--red);
+  text-align: center;
+  font-size: 0.8em;
+  padding: .8em;
 }
-p,
+p {
+  color: var(--darkgrey);
+}
 a {
   text-decoration: none;
   color: var(--darkgrey);
-  cursor: pointer;
-  &:hover {
-		color: red;
-	}
+  &:hover {color: var(--red)}
 }
-
 li,
 blockquote,
 input {

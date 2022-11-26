@@ -4,9 +4,7 @@ import styled from 'styled-components';
 const Home = () => {
 	return (
 		<Wrapper>
-			<Titre>
-				Programme pour réussir le démarrage d'une communauté de pratique
-			</Titre>
+			<Titre>Réussir le démarrage d'une communauté de pratique</Titre>
 
 			<RightSection>
 				<Introduction>
@@ -16,12 +14,12 @@ const Home = () => {
 					</p>
 					<p>
 						Il vous donnera une démarche structurée pour démarrer une
-						<Bold> communauté de pratique </Bold>, qui sera
+						<Bold> communauté de pratique</Bold>, qui sera
 						<Bold> mobilisatrice </Bold>
 						et<Bold> pérenne </Bold>
 					</p>
 				</Introduction>
-				<button>PROGRAMME</button>
+				<Button>PROGRAMME</Button>
 			</RightSection>
 		</Wrapper>
 	);
@@ -29,21 +27,32 @@ const Home = () => {
 
 export default Home;
 const Wrapper = styled.section`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 	padding-left: 1em;
 	padding-right: 1em;
+	gap: 1.5em;
+	align-items: flex-start;
 `;
 
 const RightSection = styled.div``;
 
 const Titre = styled.h1`
-	color: var(--darkgrey);
-	font-size: 2em;
+	width: 300px;
 `;
 
 const Introduction = styled.p`
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
 	color: var(--lightgrey);
+	margin-bottom: 1em;
+	width: 343px;
 `;
 
 const Bold = styled.span`
 	font-weight: 700;
 `;
+
+const Button = styled.button``;
