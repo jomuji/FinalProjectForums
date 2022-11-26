@@ -140,7 +140,7 @@ const NavBar = () => {
 									<NavLink
 										key={title}
 										to={`/programme/${title}`}
-										style={(isActive) => ({
+										style={({ isActive }) => ({
 											textDecoration: !isActive ? 'none' : 'underline',
 										})}
 									>
@@ -167,8 +167,8 @@ const NavWrapper = styled.div`
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	/* 	position: fixed;
-	top: 0; */
+	position: fixed;
+	top: 0;
 	transition-timing-function: ease-in;
 	transition: 0.5s;
 
@@ -181,6 +181,7 @@ const NavWrapper = styled.div`
 
 const SecondSection = styled.section`
 	display: block;
+	margin-right: 3em;
 `;
 
 const Logo = styled.div`
@@ -189,6 +190,7 @@ const Logo = styled.div`
 	font-weight: 700;
 	gap: 0.5em;
 	margin-bottom: 1em;
+	width: 322px;
 	img {
 		width: 50px;
 	}

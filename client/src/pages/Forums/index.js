@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 
 // components
@@ -11,14 +12,10 @@ import { AllModulesContext } from '../../components/Context/AllModulesContext';
 
 const Forums = () => {
 	const indicatorSize = 80;
-	const { isAuthenticated } = useAuth0();
 	const { modules } = useContext(AllModulesContext);
+	const { isAuthenticated } = useAuth0();
 
-	useEffect(() => {
-		if (isAuthenticated) {
-			// fetch backend to get user info
-		}
-	}, [isAuthenticated]);
+	console.log(modules, 'modules');
 
 	return (
 		<>
@@ -35,25 +32,32 @@ const Forums = () => {
 					}}
 				/>
 			) : (
-				<>
+				<Wrapper>
 					<div>
 						<h1>Forums</h1>
 						{isAuthenticated ? <LogoutButton /> : <LoginButton />}
 					</div>
 					<section>
-						{modules.map((module) => {
-							<div>
-								<div>{module._id}</div> <div>FORUM</div>
-							</div>;
-							<div>
-								<div>{module.titre}</div> <div>{module.objectif}</div>
-							</div>;
-						})}
+						{modules.map((module) => (
+							<>
+								<div>
+									<div>{module._id}</div> <div>FORUM</div>
+								</div>
+								<div>
+									<div>{module.titre}</div> <div>{module.objectif}</div>
+								</div>
+							</>
+						))}
 					</section>
-				</>
+				</Wrapper>
 			)}
 		</>
 	);
 };
 
 export default Forums;
+
+const Wrapper = styled.section`
+	margin-top: 16em;
+	padding-left: 1em;
+`;

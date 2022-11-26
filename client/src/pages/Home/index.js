@@ -19,7 +19,7 @@ const Home = () => {
 						et<Bold> pérenne </Bold>
 					</p>
 				</Introduction>
-				<Button>PROGRAMME</Button>
+				<Button>APERÇU DU PROGRAMME</Button>
 			</RightSection>
 		</Wrapper>
 	);
@@ -34,6 +34,7 @@ const Wrapper = styled.section`
 	padding-right: 1em;
 	gap: 1.5em;
 	align-items: flex-start;
+	margin-top: 16em;
 `;
 
 const RightSection = styled.div``;
