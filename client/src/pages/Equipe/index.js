@@ -8,21 +8,42 @@ import Mathieu from '../../assets/mathieu.png';
 const Equipe = () => {
 	return (
 		<Wrapper>
-			<div>Équipe</div>
+			<h1>Équipe</h1>
 
-			<img
-				src={Janette}
-				alt='Logo'
-				onMouseOver={(e) => (e.currentTarget.src = Codes)}
-				onMouseOut={(e) => (e.currentTarget.src = Janette)}
-			/>
+			<section>
+				<img
+					src={Janette}
+					alt='Logo'
+					onMouseOver={(e) => (e.currentTarget.src = Codes)}
+					onMouseOut={(e) => (e.currentTarget.src = Janette)}
+				/>
+				<p>Janette Mujica</p>
+				<p>CODEUSE ET DESIGNER</p>
+				<p>
+					Chez Ailleurs, je m’intéresse à mobiliser la connaissance vers
+					l'action.
+				</p>
+				<p>
+					Durant une douzaine d’année, j’ai optimisé la productivité de
+					dirigeants en tant qu’adjointe exécutive. J’entreprends une
+					réorientation de carrière qui vise à prioriser l’expérience
+					utilisateur. J’étudie l’innovation et l'entrepreneuriat à HEC Montréal
+					ainsi que le développement web à Concordia.
+				</p>
 
-			<img
-				src={Mathieu}
-				alt='Logo'
-				onMouseOver={(e) => (e.currentTarget.src = Famille)}
-				onMouseOut={(e) => (e.currentTarget.src = Mathieu)}
-			/>
+				<p>CODEUSE ET DESIGNER.</p>
+			</section>
+
+			<section>
+				<img
+					src={Mathieu}
+					alt='Logo'
+					onMouseOver={(e) => (e.currentTarget.src = Famille)}
+					onMouseOut={(e) => (e.currentTarget.src = Mathieu)}
+				/>
+
+				<p></p>
+			</section>
 		</Wrapper>
 	);
 };
