@@ -9,6 +9,7 @@ const { getModulesbyId } = require('./handlers/modules/getModulesById');
 const {
 	getOrCreateUserByEmail,
 } = require('./handlers/users/getOrCreateUserByEmail');
+const { getModulesLiens } = require('./handlers/modules/getModuleLiens');
 
 const port = 8000;
 
@@ -35,6 +36,7 @@ express()
 	.get('/modules', getAllModules)
 	.get('/modules/:_id', getModulesbyId)
 	.get('/moduletitles', getModulesTitles)
+	.get('/moduleliens', getModulesLiens)
 
 	.listen(port, () => {
 		console.log(`Example app listening on port ${port}`);

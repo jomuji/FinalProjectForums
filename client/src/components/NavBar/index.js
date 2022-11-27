@@ -1,32 +1,19 @@
-import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { CircularProgress } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
+import { MdAccountCircle } from 'react-icons/md';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link, NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import LogoGoldPng from '../../assets/LogoGoldPng.png';
 import LogoRedPng from '../../assets/LogoRedPng.png';
-import { CircularProgress } from '@mui/material';
-import { MdAccountCircle } from 'react-icons/md';
-import { useAuth0 } from '@auth0/auth0-react';
+import { LiensContext } from '../../components/Context/LiensContext';
 
 const NavBar = () => {
-	const [moduleTitles, setModuleTitles] = useState(null);
 	const indicatorSize = 80;
 	const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 	const navigate = useNavigate();
 	const [show, setShow] = useState(true);
-
-	useEffect(() => {
-		fetch('/moduletitles')
-			.then((res) => res.json())
-			.then((data) =>
-				// When the data is received, update moduleTitlesState
-				setModuleTitles(data.data)
-			)
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+	const { liensTitres } = useContext(LiensContext);
 
 	const controlNavbar = () => {
 		if (window.scrollY > 100) {
@@ -86,7 +73,7 @@ const NavBar = () => {
 
 	return (
 		<>
-			{!moduleTitles ? (
+			{!liensTitres ? (
 				<CircularProgress
 					size={indicatorSize}
 					sx={{
@@ -107,7 +94,7 @@ const NavBar = () => {
 								alt='Logo'
 								onMouseOver={(e) => (e.currentTarget.src = LogoRedPng)}
 								onMouseOut={(e) => (e.currentTarget.src = LogoGoldPng)}
-							/>{' '}
+							/>
 						</Link>
 						<TitreLogo>
 							Conseil en
@@ -120,28 +107,52 @@ const NavBar = () => {
 
 					<SecondSection>
 						<Nav>
-							<NavLink to='/'>
+							<NavLink
+								to='/'
+								style={({ isActive }) => ({
+									textDecoration: !isActive ? 'none' : 'underline',
+									textDecorationThickness: !isActive ? 'none' : '2px',
+								})}
+							>
 								<Page>accueil</Page>
 							</NavLink>
-							<NavLink to='/programme'>
+							<NavLink
+								to='/programme'
+								style={({ isActive }) => ({
+									textDecoration: !isActive ? 'none' : 'underline',
+									textDecorationThickness: !isActive ? 'none' : '2px',
+								})}
+							>
 								<Page>programme</Page>
 							</NavLink>
-							<NavLink to='/forums'>
+							<NavLink
+								to='/forums'
+								style={({ isActive }) => ({
+									textDecoration: !isActive ? 'none' : 'underline',
+									textDecorationThickness: !isActive ? 'none' : '2px',
+								})}
+							>
 								<Page>forums</Page>
 							</NavLink>
-							<NavLink to='/equipe'>
+							<NavLink
+								to='/equipe'
+								style={({ isActive }) => ({
+									textDecoration: !isActive ? 'none' : 'underline',
+									textDecorationThickness: !isActive ? 'none' : '2px',
+								})}
+							>
 								<Page>équipe</Page>
 							</NavLink>
 						</Nav>
 						<ModuleNav>
-							{moduleTitles.map((title) => {
+							{liensTitres.map((title) => {
 								title = title.toUpperCase();
 								return (
 									<NavLink
 										key={title}
 										to={`/programme/${title}`}
 										style={({ isActive }) => ({
-											textDecoration: !isActive ? 'none' : 'underline',
+											fontWeight: !isActive ? '400' : '700',
 										})}
 									>
 										<div>{title}</div>
@@ -168,6 +179,8 @@ const NavWrapper = styled.div`
 	flex-wrap: wrap;
 	justify-content: space-between;
 	position: fixed;
+	background-color: #fffaea;
+	z-index: 1000;
 	top: 0;
 	transition-timing-function: ease-in;
 	transition: 0.5s;

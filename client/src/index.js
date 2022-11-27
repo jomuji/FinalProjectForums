@@ -8,6 +8,7 @@ import App from './App';
 
 // context import
 import AllModulesProvider from './components/Context/AllModulesContext';
+import LiensProvider from './components/Context/LiensContext';
 
 const { REACT_APP_AUTH0_DOMAIN, REACT_APP_AUTH0_CLIENT_ID } = process.env;
 
@@ -19,9 +20,11 @@ root.render(
 			clientId={REACT_APP_AUTH0_CLIENT_ID}
 			redirectUri={window.location.origin}
 		>
-			<AllModulesProvider>
-				<App />
-			</AllModulesProvider>
+			<LiensProvider>
+				<AllModulesProvider>
+					<App />
+				</AllModulesProvider>
+			</LiensProvider>
 		</Auth0Provider>
 	</React.StrictMode>
 );

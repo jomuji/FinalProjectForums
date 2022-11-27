@@ -54,7 +54,7 @@ export default createGlobalStyle`
     line-height: 1; 
       margin: 0px;
       font-family: var(--font);
-      background-color: var(--beige);
+      background-color: #fffaea;
     /*   color: var(--darkgrey); */
   }
   ol, ul {

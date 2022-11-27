@@ -11,7 +11,7 @@ import Forums from './pages/Forums/index';
 import Home from './pages/Home';
 import Programme from './pages/Programme/index';
 import ProgrammeModule from './pages/Programme/ProgrammeModule';
-import User from './pages/User';
+import UserProfile from './components/UserProfile';
 
 const App = () => {
 	/// USER IDENTIFICATION GET OR CREATE NEW
@@ -44,7 +44,7 @@ const App = () => {
 			<NavBar />
 			<Routes>
 				<Route path='/' element={<Home />} />
-				<Route path='/user' element={<User />} />
+				<Route path='/user' element={<UserProfile />} />
 				<Route path='/programme' element={<Programme />} />
 				<Route path='/programme/:modules' element={<ProgrammeModule />} />
 				<Route path='/forums' element={<Forums />} />
