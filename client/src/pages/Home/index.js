@@ -56,4 +56,15 @@ const Bold = styled.span`
 	font-weight: 700;
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+	border: none;
+	background-color: var(--red);
+	color: #fffaea;
+	border-radius: 1em;
+	padding: 0.8em 1.6em 0.8em;
+	font-weight: 700;
+	font-size: 0.8em;
+	&:hover {
+		background-color: var(--green);
+	}
+`;

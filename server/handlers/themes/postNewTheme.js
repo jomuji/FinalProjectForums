@@ -13,7 +13,7 @@ const options = {
 
 const postNewTheme = async (req, res) => {
 	// Request newTheme from body
-	const { theme, email } = req.body;
+	const { theme, email, _id } = req.body;
 	const generatedId = uuidv4();
 
 	// CALL client  from MongoDB
@@ -45,20 +45,37 @@ const postNewTheme = async (req, res) => {
 		);
 
 		console.log(updateUserWithNewTheme);
-		/* 		db.collection('themes')
-			.find()
-			.forEach(function (d) {
-				db.getSiblingDB('ailleursConseil')['user'].insert(d);
-			}); */
+
+		const updateModuleWithNewTheme = await db.collection('modules').updateOne(
+			{ _id },
+			{
+				$push: {
+					themes: generatedId,
+				},
+			},
+			{
+				upsert: true,
+			}
+		);
+
 		// send response back to frontend as well
 		if (result) {
 			return res.status(200).json({ data: result });
 		}
 
-		if (updateUserWithNewTheme)
-			res.status(200).json({ data: updateUserWithNewTheme });
-		else {
+		if (updateUserWithNewTheme) {
+			return res.status(200).json({ data: updateUserWithNewTheme });
+		}
+		if (updateModuleWithNewTheme) {
+			return res.status(200).json({ data: updateModuleWithNewTheme });
+		} else {
 			// if not found
+			return res
+				.status(400)
+				.json({
+					status: 400,
+					message: '[ ERROR ]: Result, User or Module not found',
+				});
 		}
 	} catch (err) {
 		console.error(err);

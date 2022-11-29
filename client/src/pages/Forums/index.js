@@ -45,7 +45,7 @@ const Forums = () => {
 								<NavLink key={module._id} to={`/forums/${module._id}`}>
 									<ModuleSection>
 										<FirstSection>
-											<Id>{module._id}</Id> <div>FORUM</div>
+											<Id>{module._id}</Id> <Forum>FORUM</Forum>
 										</FirstSection>
 
 										<SecondSection>
@@ -93,24 +93,31 @@ const ModuleSection = styled.button`
 	flex-direction: row;
 	gap: 1em;
 	align-items: flex-end;
+	background-color: var(--beige);
+	color: var(--darkgrey);
 	&:hover {
+		color: var(--red);
 	}
 `;
 const FirstSection = styled.div`
 	text-align: right;
 `;
 
-const Id = styled.p`
+const Id = styled.div`
 	font-size: 4em;
 `;
-const SecondSection = styled.section``;
+const Forum = styled.div``;
 
-const Objectif = styled.p`
+const SecondSection = styled.section`
+	text-align: left;
+`;
+
+const Objectif = styled.div`
 	font-size: 1em;
 	color: var(--lightgrey);
 `;
 
-const Titre = styled.p`
+const Titre = styled.div`
 	font-weight: 700;
 	font-size: 1.3em;
 `;

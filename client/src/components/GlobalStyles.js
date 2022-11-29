@@ -77,7 +77,8 @@ h2,
 h3,
 label,
 button {
-
+	border: none;
+  cursor: pointer;
 }
 p {
   color: var(--darkgrey);

@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CreateTheme from '../../components/Themes/CreateTheme';
+import { CircularProgress } from '@mui/material';
 
 const ForumsModule = () => {
+	const indicatorSize = 80;
 	const { _id } = useParams();
 	const [moduleById, setModuleById] = useState(null);
 
@@ -13,8 +15,8 @@ const ForumsModule = () => {
 		fetch(`/modules/${_id}`)
 			.then((res) => res.json())
 			.then(
-				// When the data is received, update setCateogryState
-				(data) => console.log(data.data, 'DATA MODULE ID')
+				// When the data is received, update setModuleById
+				(data) => setModuleById(data.data)
 			)
 			.catch((error) => {
 				console.log(error);
@@ -22,13 +24,30 @@ const ForumsModule = () => {
 		// DEPENDENCY: TRIGGERED WHEN CATEGORY PARAMS CHANGES
 	}, []);
 
-	/* console.log(moduleById, 'ModuleById'); */
-
 	return (
-		<Wrapper>
-			<TitrePage>FORUM</TitrePage>
-			<CreateTheme />
-		</Wrapper>
+		<>
+			{!moduleById ? (
+				<CircularProgress
+					size={indicatorSize}
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						marginTop: `${-indicatorSize / 2}px`,
+						marginLeft: `${-indicatorSize / 2}px`,
+						color: '#FADA80',
+					}}
+				/>
+			) : (
+				<Wrapper>
+					<TitrePage>
+						FORUM: <Titre>{moduleById[0].titre}</Titre>
+					</TitrePage>
+
+					<CreateTheme />
+				</Wrapper>
+			)}
+		</>
 	);
 };
 
@@ -44,4 +63,10 @@ const Wrapper = styled.div`
 const TitrePage = styled.h1`
 	font-weight: 700;
 	margin-bottom: 1.5em;
+`;
+
+const Titre = styled.span`
+	font-weight: 700;
+	margin-bottom: 1.5em;
+	text-decoration: underline;
 `;

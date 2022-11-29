@@ -2,12 +2,16 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
+import { Editor, EditorState } from 'draft-js';
 
 const CreateTheme = () => {
 	/* const [reloadState, setReloadState] = useState(false); */
 	const [startNewThemeState, setStartNewTheme] = useState('');
 	const [disableButton, setDisableButton] = useState(true);
 	const [colorStyling, setColorStyling] = useState('grey');
+	const [editorState, setEditorState] = useState(() =>
+		EditorState.createEmpty()
+	);
 
 	useEffect(() => {
 		console.log(disableButton);
@@ -50,10 +54,10 @@ const CreateTheme = () => {
 		const textLengthremainder = 280 - e.target.value.length;
 
 		if (textLengthremainder <= 0) {
-			setColorStyling('red');
+			setColorStyling('#FB483B');
 			setDisableButton(true);
 		} else if (textLengthremainder <= 55) {
-			setColorStyling('yellow');
+			setColorStyling('#FDA346');
 			setDisableButton(false);
 		} else {
 			setColorStyling('grey');
@@ -74,6 +78,8 @@ const CreateTheme = () => {
 					handleChange(e);
 				}}
 			></textarea>
+
+			<Editor editorState={editorState} onChange={setEditorState} />
 
 			<ButtonWrapper>
 				<TextLimit style={{ color: colorStyling }}>
@@ -106,28 +112,26 @@ const Form = styled.form`
 `;
 
 const Button = styled.button`
-	width: 100px;
 	border: none;
 	background-color: var(--red);
 	color: #fffaea;
-	border-radius: 15px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	font-weight: bolder;
+	border-radius: 1em;
+	padding: 0.8em 1.6em 0.8em;
+	font-weight: 700;
 	font-size: 0.8em;
 
 	&:hover {
-		color: ${(props) => (props.disabled ? 'white' : '#4C00FF')};
+		color: ${(props) => (props.disabled ? '#FFFAEA' : '#FFFAEA')};
 		background-color: ${(props) =>
-			props.disabled ? 'var(--darkgrey)' : 'var(--red)'};
+			props.disabled ? 'var(--darkgrey)' : 'var(--green);'};
 		border-radius: 15px;
 		cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
 	}
-
+	/* 
 	button:disabled {
 		background-color: grey;
 		cursor: no-drop;
-	}
+	} */
 `;
 
 const ButtonWrapper = styled.div`

@@ -8,7 +8,10 @@ const LogoutButton = () => {
 
 	return (
 		<Button onClick={() => logout({ returnTo: window.location.origin })}>
-			<IoMdLogOut /> DÉCONNEXION
+			{/* 			<Icon>
+				<IoMdLogOut />
+			</Icon> */}
+			DÉCONNEXION
 		</Button>
 	);
 };
@@ -22,14 +25,22 @@ const Button = styled.button`
 	align-items: center;
 	font-size: 0.8em;
 	gap: 0.8em;
-
-	color: #fffaea;
-	font-weight: 700;
-	border: none;
-	padding: 0px;
 	cursor: pointer;
-	border-radius: 80px;
-	background-color: var(--red);
 	text-align: center;
-	padding: 0.8em;
+	border: none;
+	background-color: var(--red);
+	color: #fffaea;
+	border-radius: 1em;
+	padding: 0.8em 1.6em 0.8em;
+	font-weight: 700;
+	font-size: 0.8em;
+	&:hover {
+		background-color: var(--green);
+	}
+
+	/* 	span {
+		font-size: 1.4em;
+	} */
 `;
+
+const Icon = styled.span``;
