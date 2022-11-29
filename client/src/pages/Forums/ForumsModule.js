@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import CreateTheme from '../../components/Themes/CreateTheme';
 
 const ForumsModule = () => {
 	const { _id } = useParams();
@@ -23,11 +24,24 @@ const ForumsModule = () => {
 
 	/* console.log(moduleById, 'ModuleById'); */
 
-	return <Wrapper>ForumsModule</Wrapper>;
+	return (
+		<Wrapper>
+			<TitrePage>FORUM</TitrePage>
+			<CreateTheme />
+		</Wrapper>
+	);
 };
 
 export default ForumsModule;
 
 const Wrapper = styled.div`
 	margin-top: 16em;
+	margin-left: 1em;
+	margin-right: 1em;
+	margin-bottom: 1em;
+`;
+
+const TitrePage = styled.h1`
+	font-weight: 700;
+	margin-bottom: 1.5em;
 `;

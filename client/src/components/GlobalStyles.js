@@ -77,16 +77,7 @@ h2,
 h3,
 label,
 button {
-  color: #FFFAEA;
-  font-weight: 700;
-  border: none;
-  padding: 0px;
-  cursor: pointer;
-  border-radius: 80px;
-  background-color: var(--red);
-  text-align: center;
-  font-size: 0.8em;
-  padding: .8em;
+
 }
 p {
   color: var(--darkgrey);

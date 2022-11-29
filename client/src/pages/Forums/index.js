@@ -1,7 +1,8 @@
-import React, { useContext, NavLink } from 'react';
+import React, { useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 // components
 import LoginButton from '../../components/LoginButton';
@@ -31,26 +32,28 @@ const Forums = () => {
 				/>
 			) : (
 				<Wrapper>
-					<div>
-						<h1>Forums</h1>
+					<TitreSection>
+						<TitrePage>FORUMS</TitrePage>
 						{isAuthenticated ? <LogoutButton /> : <LoginButton />}
-					</div>
+					</TitreSection>
 					<ForumsSection>
 						{modules.map((module) => {
 							console.log(module, 'module');
 							let titre = module.titre;
 							titre = titre.toUpperCase();
 							return (
-								<ModuleSection>
-									{/* 	<NavLink key={module._id} to={`/forums/${module._id}`}> */}
-									<FirstSection>
-										<Id>{module._id}</Id> <div>FORUM</div>
-									</FirstSection>
-									{/* 	</NavLink> */}
-									<SecondSection>
-										<Titre>{titre}</Titre> <div>{module.objectif}</div>
-									</SecondSection>
-								</ModuleSection>
+								<NavLink key={module._id} to={`/forums/${module._id}`}>
+									<ModuleSection>
+										<FirstSection>
+											<Id>{module._id}</Id> <div>FORUM</div>
+										</FirstSection>
+
+										<SecondSection>
+											<Titre>{titre}</Titre>
+											<Objectif>{module.objectif}</Objectif>
+										</SecondSection>
+									</ModuleSection>
+								</NavLink>
 							);
 						})}
 					</ForumsSection>
@@ -68,25 +71,44 @@ const Wrapper = styled.section`
 	padding-right: 1em;
 	padding-bottom: 1em;
 `;
+const TitreSection = styled.section`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+`;
+
+const TitrePage = styled.h1`
+	font-weight: 700;
+`;
+
 const ForumsSection = styled.section`
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
+	margin-top: 1.5em;
+	margin-bottom: 1em;
 `;
-const ModuleSection = styled.section`
+const ModuleSection = styled.button`
 	display: flex;
 	flex-direction: row;
 	gap: 1em;
 	align-items: flex-end;
+	&:hover {
+	}
 `;
-const FirstSection = styled.section`
+const FirstSection = styled.div`
 	text-align: right;
 `;
 
 const Id = styled.p`
-	font-size: 5em;
+	font-size: 4em;
 `;
 const SecondSection = styled.section``;
+
+const Objectif = styled.p`
+	font-size: 1em;
+	color: var(--lightgrey);
+`;
 
 const Titre = styled.p`
 	font-weight: 700;

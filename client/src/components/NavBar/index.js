@@ -49,14 +49,12 @@ const NavBar = () => {
 
 			// if user is authenticated, it displays his name and links to signoff
 		} else if (isAuthenticated) {
+			console.log(user, 'USER NAVBAR');
 			let name = user.given_name;
 			name = name.toUpperCase();
 			return (
 				<User onClick={() => navigate('/user')}>
-					<UserPicture>
-						<img src={user.picture} alt='userPic' />
-					</UserPicture>
-					<Connexion>{user.given_name}</Connexion>
+					<img src={user.picture} alt='PhotoUsager' />
 					{/* <Connexion>{name}</Connexion> */}
 				</User>
 			);
@@ -65,7 +63,9 @@ const NavBar = () => {
 		} else {
 			return (
 				<User onClick={() => loginWithRedirect()}>
-					<MdAccountCircle />
+					<UserIcon>
+						<MdAccountCircle />
+					</UserIcon>
 				</User>
 			);
 		}
@@ -241,18 +241,27 @@ const User = styled.a`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	font-size: 50px;
 	line-height: 0.5;
 	align-items: left;
-	span {
-		font-size: 0.6em;
+	cursor: pointer;
+	img {
+		width: 50px;
+		border-radius: 50%;
+		margin-bottom: 0.5em;
 	}
 `;
 
-const UserPicture = styled.div`
+/* const UserPicture = styled.div`
 	img {
 		width: 50px;
 		border-radius: 50%;
 	}
+`; */
+const Connexion = styled.span`
+	font-size: 0.8em;
+	color: var(--lightgrey);
 `;
-const Connexion = styled.span``;
+
+const UserIcon = styled.span`
+	font-size: 50px;
+`;

@@ -24,7 +24,14 @@ const getOrCreateUserByEmail = async (req, res) => {
 		const queryObj = { email };
 
 		const findRes = await db.collection('users').findOne(queryObj);
+		//{^name: ;kwjg, email "snkgj", themes: [{^key: "theme"}, id, d, ]}
+		//get all the themes by the user
+
+		//replace theme value in findRes with the ones coming from above
+		// findRes.themes = resFromAbove
+
 		// if found, send response back to frontend
+
 		if (findRes) {
 			return res.status(200).json({ data: findRes });
 		} else {
