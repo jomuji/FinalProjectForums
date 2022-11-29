@@ -7,22 +7,26 @@ import { CircularProgress } from '@mui/material';
 
 const ForumsModule = () => {
 	const indicatorSize = 80;
-	const { _id } = useParams();
+	const { lien } = useParams();
 	const [moduleById, setModuleById] = useState(null);
 
 	// fetch data getModulesById '/modules/:_id'
 	useEffect(() => {
-		fetch(`/modules/${_id}`)
+		console.log(lien, 'lien');
+		fetch(`/themesbymodules/${lien}`)
 			.then((res) => res.json())
 			.then(
 				// When the data is received, update setModuleById
-				(data) => setModuleById(data.data)
+				(data) => {
+					setModuleById(data.data);
+					console.log(data, 'DATASETMODULE');
+				}
 			)
 			.catch((error) => {
 				console.log(error);
 			});
 		// DEPENDENCY: TRIGGERED WHEN CATEGORY PARAMS CHANGES
-	}, []);
+	}, [lien]);
 
 	return (
 		<>

@@ -11,7 +11,7 @@ const options = {
 
 // RETURN AN ARRAY OF ALL MODULES BY MODULE WILL USE TO USEPARAMS
 
-const getModulesbyId = async (req, res) => {
+const getAllModulesbyLien = async (req, res) => {
 	// CREATE A NEW CLIENT
 	const client = new MongoClient(MONGO_URI, options);
 
@@ -23,14 +23,14 @@ const getModulesbyId = async (req, res) => {
 		console.log('connected!');
 
 		// create category to request params
-		const { _id } = req.params;
+		const { lien } = req.params;
 
 		//add some data to this empty collection
-		const result = await db.collection('modules').find({ _id }).toArray();
+		const result = await db.collection('modules').find({ lien }).toArray();
 
 		// On success/no error, send
 		if (result.length <= 0) {
-			res.status(404).json({ status: 404, message: 'module not found' });
+			res.status(404).json({ status: 404, message: 'lien not found' });
 		} else {
 			res.status(200).json({ status: 200, data: result });
 		}
@@ -44,4 +44,4 @@ const getModulesbyId = async (req, res) => {
 	}
 };
 
-module.exports = { getModulesbyId };
+module.exports = { getAllModulesbyLien };

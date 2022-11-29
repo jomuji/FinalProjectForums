@@ -15,6 +15,7 @@ const Forums = () => {
 	const indicatorSize = 80;
 	const { modules } = useContext(AllModulesContext);
 	const { isAuthenticated } = useAuth0();
+	let titre = null;
 
 	return (
 		<>
@@ -38,18 +39,50 @@ const Forums = () => {
 					</TitreSection>
 					<ForumsSection>
 						{modules.map((module) => {
-							console.log(module, 'module');
-							let titre = module.titre;
-							titre = titre.toUpperCase();
+							{
+								console.log(module, 'MODULE');
+							}
+							if (!module) {
+								<CircularProgress
+									size={indicatorSize}
+									sx={{
+										position: 'absolute',
+										top: '50%',
+										left: '50%',
+										marginTop: `${-indicatorSize / 2}px`,
+										marginLeft: `${-indicatorSize / 2}px`,
+										color: '#FADA80',
+									}}
+								/>;
+							} else {
+								titre = module.titre;
+								titre = titre.toUpperCase();
+							}
+
 							return (
-								<NavLink key={module._id} to={`/forums/${module._id}`}>
+								<NavLink key={module.lien} to={`/forums/${module.lien}`}>
 									<ModuleSection>
 										<FirstSection>
 											<Id>{module._id}</Id> <Forum>FORUM</Forum>
 										</FirstSection>
 
 										<SecondSection>
-											<Titre>{titre}</Titre>
+											{!titre ? (
+												<CircularProgress
+													size={indicatorSize}
+													sx={{
+														position: 'absolute',
+														top: '50%',
+														left: '50%',
+														marginTop: `${-indicatorSize / 2}px`,
+														marginLeft: `${-indicatorSize / 2}px`,
+														color: '#FADA80',
+													}}
+												/>
+											) : (
+												<Titre>{titre}</Titre>
+											)}
+
 											<Objectif>{module.objectif}</Objectif>
 										</SecondSection>
 									</ModuleSection>

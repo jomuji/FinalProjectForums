@@ -1,12 +1,18 @@
 import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import { Editor, EditorState } from 'draft-js';
 
 const CreateTheme = () => {
 	/* const [reloadState, setReloadState] = useState(false); */
-	const [startNewThemeState, setStartNewTheme] = useState('');
+	const { user, isAuthenticated } = useAuth0();
+	const indicatorSize = 80;
+	const { lien } = useParams();
+	const [themesByID, setThemesbyId] = useState(null);
+	const [theme, setTheme] = useState('');
 	const [disableButton, setDisableButton] = useState(true);
 	const [colorStyling, setColorStyling] = useState('grey');
 	const [editorState, setEditorState] = useState(() =>
@@ -17,32 +23,40 @@ const CreateTheme = () => {
 		console.log(disableButton);
 	}, [disableButton]);
 
-	/*   useEffect(() => {
-    fetch("/api/me/home-feed")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setTweetsById(data);
-      })
-      .catch((err) => {
-        console.log("err", err);
-        setError(true);
-      });
-  }, [reloadState]); */
-
+	useEffect(() => {
+		console.log('hello');
+		fetch(`/themesbymodules/${lien}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setThemesbyId(data.data);
+				console.log(data);
+			})
+			.catch((err) => {
+				console.log('err', err);
+			});
+	}, []);
+	// reload state
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		const email = user.email;
+		/* const theme = themesByID.theme; */
 
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ status: startNewThemeState }),
+			body: JSON.stringify({
+				theme,
+				email,
+				lien,
+			}),
 		};
-		fetch('/newtheme/', requestOptions)
+
+		fetch('/newtheme', requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				/* setReloadState(!reloadState); */
-				setStartNewTheme('');
+				/* 	setReloadState(!reloadState); */
+				setTheme('');
 			})
 			.catch((error) => {
 				console.log(error);
@@ -50,10 +64,15 @@ const CreateTheme = () => {
 	};
 
 	const handleChange = (e) => {
-		setStartNewTheme(e.target.value);
+		setTheme(e.target.value);
 		const textLengthremainder = 280 - e.target.value.length;
 
-		if (textLengthremainder <= 0) {
+		if (!isAuthenticated) {
+			setDisableButton(true);
+			window.alert(
+				'Veuillez vous connecter avec des identifiants pour participer au forum.'
+			);
+		} else if (textLengthremainder <= 0) {
 			setColorStyling('#FB483B');
 			setDisableButton(true);
 		} else if (textLengthremainder <= 55) {
@@ -66,31 +85,47 @@ const CreateTheme = () => {
 	};
 
 	return (
-		<Form
-			onSubmit={(e) => {
-				handleSubmit(e);
-			}}
-		>
-			<textarea
-				placeholder='Créez une nouvelle conversation. Posez une question.'
-				value={startNewThemeState}
-				onChange={(e) => {
-					handleChange(e);
-				}}
-			></textarea>
+		<>
+			{!themesByID ? (
+				<CircularProgress
+					size={indicatorSize}
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						marginTop: `${-indicatorSize / 2}px`,
+						marginLeft: `${-indicatorSize / 2}px`,
+						color: '#FADA80',
+					}}
+				/>
+			) : (
+				<Form
+					onSubmit={(e) => {
+						handleSubmit(e);
+					}}
+				>
+					<textarea
+						placeholder='Créez une nouvelle conversation. Posez une question.'
+						value={theme}
+						onChange={(e) => {
+							handleChange(e);
+						}}
+					></textarea>
 
-			<Editor editorState={editorState} onChange={setEditorState} />
+					<Editor editorState={editorState} onChange={setEditorState} />
 
-			<ButtonWrapper>
-				<TextLimit style={{ color: colorStyling }}>
-					{280 - startNewThemeState.length}
-				</TextLimit>
+					<ButtonWrapper>
+						<TextLimit style={{ color: colorStyling }}>
+							{280 - theme.length}
+						</TextLimit>
 
-				<Button type='submit' disabled={disableButton}>
-					CRÉER
-				</Button>
-			</ButtonWrapper>
-		</Form>
+						<Button type='submit' disabled={disableButton}>
+							CRÉER
+						</Button>
+					</ButtonWrapper>
+				</Form>
+			)}
+		</>
 	);
 };
 

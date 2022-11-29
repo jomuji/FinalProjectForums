@@ -11,10 +11,15 @@ const {
 // handlers MODULES
 const { getAllModules } = require('./handlers/modules/getAllModules');
 const { getModulesTitles } = require('./handlers/modules/getModulesTitles');
-const { getModulesbyId } = require('./handlers/modules/getModulesById');
+const {
+	getAllModulesbyLien,
+} = require('./handlers/modules/getAllModulesbyLien');
 const { getModulesLiens } = require('./handlers/modules/getModuleLiens');
 // handlers THEMES
 const { postNewTheme } = require('./handlers/themes/postNewTheme');
+const {
+	getThemesByModulesLien,
+} = require('./handlers/themes/getThemesByModulesLien');
 /* const { updateThemeById } = require('./handlers/themes/updateThemeById');
 const { deleteThemeById } = require('./handlers/themes/deleteThemeById'); */
 
@@ -41,11 +46,12 @@ express()
 
 	// modules endpoints
 	.get('/modules', getAllModules)
-	.get('/modules/:_id', getModulesbyId)
+	.get('/allmodules/:lien', getAllModulesbyLien)
 	.get('/moduletitles', getModulesTitles)
 	.get('/moduleliens', getModulesLiens)
 
 	// theme endpoints
+	.get('/themesbymodules/:lien', getThemesByModulesLien)
 	.post('/newtheme', postNewTheme)
 	/* 	.post('/newtheme/:_id', postNewThemeById) */
 	/* 	.patch('/newtheme/:_id', updateThemeById)

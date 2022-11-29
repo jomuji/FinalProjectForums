@@ -48,7 +48,7 @@ const App = () => {
 				<Route path='/programme' element={<Programme />} />
 				<Route path='/programme/:modules' element={<ProgrammeModule />} />
 				<Route path='/forums' element={<Forums />} />
-				<Route path='/forums/:_id' element={<ForumsModule />} />
+				<Route path='/forums/:lien' element={<ForumsModule />} />
 				<Route path='/equipe' element={<Equipe />} />
 			</Routes>
 		</BrowserRouter>
