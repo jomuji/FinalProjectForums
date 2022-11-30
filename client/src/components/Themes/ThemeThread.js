@@ -27,7 +27,6 @@ const ThemeThread = () => {
 		// DEPENDENCY: TRIGGERED WHEN LIEN PARAMS CHANGES
 	}, [lien]);
 
-	console.log(themesByModule, 'THEMESBYMODULE');
 	return (
 		<>
 			{!themesByModule ? (
@@ -47,7 +46,7 @@ const ThemeThread = () => {
 					{themesByModule.map((theme) => (
 						<ThemeSection>
 							<Nav key={theme._id} to={`/forums/fil/${theme._id}`}>
-								<Theme>{theme.theme}</Theme>{' '}
+								<Theme>{theme.theme}</Theme>
 							</Nav>
 							<UserName>
 								<Bold>Par: </Bold>
@@ -73,7 +72,6 @@ const Wrapper = styled.div`
 const ThemeSection = styled.div``;
 
 const Nav = styled(NavLink)`
-	&:hover {
 		color: var(--red);
 	}
 `;
@@ -89,6 +87,7 @@ const Bold = styled.span`
 `;
 
 const UserName = styled.p`
+	margin-top: 1em;
 	text-align: right;
 `;
 

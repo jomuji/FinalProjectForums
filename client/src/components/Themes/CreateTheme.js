@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
-/* import MyEditor from './Editor'; */
+import MyEditor from './Editor';
 
 const CreateTheme = () => {
 	const [reloadState, setReloadState] = useState(false);
@@ -16,6 +16,7 @@ const CreateTheme = () => {
 	const [themesByID, setThemesbyId] = useState(null);
 	const [theme, setTheme] = useState('');
 	const [disableButton, setDisableButton] = useState(true);
+	/* const [colorStyling, setColorStyling] = useState('grey'); */
 
 	useEffect(() => {}, [disableButton]);
 
@@ -62,13 +63,23 @@ const CreateTheme = () => {
 
 	const handleChange = (e) => {
 		setTheme(e.target.value);
+		/* 	const textLengthremainder = 280 - e.target.value.length; */
 
 		if (!isAuthenticated) {
 			setDisableButton(true);
 			window.alert(
 				'Veuillez vous connecter avec des identifiants pour participer au forum.'
 			);
-		}
+		} /* else if (textLengthremainder <= 0) {
+			setColorStyling('#FB483B');
+			setDisableButton(true);
+		} else if (textLengthremainder <= 55) {
+			setColorStyling('#FDA346');
+			setDisableButton(false);
+		} else {
+			setColorStyling('grey');
+			setDisableButton(false);
+		} */
 	};
 	/* return <MyEditor />; */
 
@@ -89,6 +100,10 @@ const CreateTheme = () => {
 					></textarea>
 
 					<ButtonWrapper>
+						{/* 						<TextLimit style={{ color: colorStyling }}>
+							{280 - theme.length}
+						</TextLimit> */}
+
 						<Button type='submit' disabled={disableButton}>
 							CRÉER
 						</Button>
