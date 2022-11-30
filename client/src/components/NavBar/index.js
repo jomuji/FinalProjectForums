@@ -49,7 +49,6 @@ const NavBar = () => {
 
 			// if user is authenticated, it displays his name and links to signoff
 		} else if (isAuthenticated) {
-			console.log(user, 'USER NAVBAR');
 			let name = user.given_name;
 			name = name.toUpperCase();
 			return (

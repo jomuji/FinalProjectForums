@@ -1,4 +1,5 @@
 'use strict';
+
 const { MongoClient } = require('mongodb');
 
 require('dotenv').config({ path: '../.env' });
@@ -9,9 +10,8 @@ const options = {
 	useUnifiedTopology: true,
 };
 
-// RETURN AN ARRAY OF ALL MODULES BY MODULE WILL USE TO USEPARAMS
-
-const getAllModulesbyLien = async (req, res) => {
+// RETURN AN ARRAY OF ALL iTEMS
+const getModulesTitlesByLien = async (req, res) => {
 	// CREATE A NEW CLIENT
 	const client = new MongoClient(MONGO_URI, options);
 
@@ -26,11 +26,13 @@ const getAllModulesbyLien = async (req, res) => {
 		const { lien } = req.params;
 
 		//etch lien for req.params
-		const result = await db.collection('modules').find({ lien }).toArray();
+		let result = await db.collection('modules').find({ lien }).toArray();
 
-		// On success/no error, send
+		result = result.map(({ titre }) => titre);
+
+		// response
 		if (result.length <= 0) {
-			res.status(404).json({ status: 404, message: 'lien not found' });
+			res.status(404).json({ status: 404, message: 'title not found' });
 		} else {
 			res.status(200).json({ status: 200, data: result });
 		}
@@ -44,4 +46,4 @@ const getAllModulesbyLien = async (req, res) => {
 	}
 };
 
-module.exports = { getAllModulesbyLien };
+module.exports = { getModulesTitlesByLien };

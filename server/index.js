@@ -15,6 +15,9 @@ const {
 	getAllModulesbyLien,
 } = require('./handlers/modules/getAllModulesbyLien');
 const { getModulesLiens } = require('./handlers/modules/getModuleLiens');
+const {
+	getModulesTitlesByLien,
+} = require('./handlers/modules/getModulesTitlesByLien');
 // handlers THEMES
 const { postNewTheme } = require('./handlers/themes/postNewTheme');
 const {
@@ -53,6 +56,7 @@ express()
 	.get('/allmodules/:lien', getAllModulesbyLien)
 	.get('/moduletitles', getModulesTitles)
 	.get('/moduleliens', getModulesLiens)
+	.get('/titles/:lien', getModulesTitlesByLien)
 
 	// theme endpoints
 	.get('/themesbymodules/:lien', getThemesByModulesLien)

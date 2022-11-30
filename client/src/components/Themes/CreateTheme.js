@@ -105,7 +105,7 @@ const CreateTheme = () => {
 					}}
 				>
 					<textarea
-						placeholder='Créez une nouvelle conversation. Posez une question.'
+						placeholder='Créez un nouveau thème de conversation'
 						value={theme}
 						onChange={(e) => {
 							handleChange(e);
@@ -138,10 +138,9 @@ const Form = styled.form`
 	border-radius: 15px;
 	padding: 1em;
 	width: 344px;
-	margin-bottom: 60px;
 
 	textarea {
-		margin-bottom: 30px;
+		margin-bottom: 1em;
 		height: 100px;
 	}
 `;
