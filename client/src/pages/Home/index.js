@@ -1,27 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
+import Footer from '../../components/Footer';
 
 const Home = () => {
 	return (
-		<Wrapper>
-			<Titre>Réussir le démarrage d'une communauté de pratique</Titre>
+		<>
+			<Wrapper>
+				<Titre>Réussir le démarrage d'une communauté de pratique</Titre>
 
-			<RightSection>
-				<Introduction>
-					<p>
-						Ce programme s'adresse aux<Bold> facilitatrices </Bold>et
-						<Bold> facilitateurs </Bold> de communauté de pratique
-					</p>
-					<p>
-						Il vous donnera une démarche structurée pour démarrer une
-						<Bold> communauté de pratique</Bold>, qui sera
-						<Bold> mobilisatrice </Bold>
-						et<Bold> pérenne </Bold>
-					</p>
-				</Introduction>
-				<Button>APERÇU DU PROGRAMME</Button>
-			</RightSection>
-		</Wrapper>
+				<RightSection>
+					<Introduction>
+						<p>
+							Ce programme s'adresse aux<Bold> facilitatrices </Bold>et
+							<Bold> facilitateurs </Bold> de communauté de pratique
+						</p>
+						<p>
+							Il vous donnera une démarche structurée pour démarrer une
+							<Bold> communauté de pratique</Bold>, qui sera
+							<Bold> mobilisatrice </Bold>
+							et<Bold> pérenne </Bold>
+						</p>
+					</Introduction>
+					<Button>APERÇU DU PROGRAMME</Button>
+				</RightSection>
+			</Wrapper>
+			<Footer />
+		</>
 	);
 };
 
@@ -35,6 +39,7 @@ const Wrapper = styled.section`
 	gap: 1.5em;
 	align-items: flex-start;
 	margin-top: 16em;
+	margin-bottom: 57.6px;
 `;
 
 const RightSection = styled.div``;

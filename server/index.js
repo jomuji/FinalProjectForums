@@ -20,6 +20,10 @@ const { postNewTheme } = require('./handlers/themes/postNewTheme');
 const {
 	getThemesByModulesLien,
 } = require('./handlers/themes/getThemesByModulesLien');
+// hander EMAILLIST
+const {
+	postEmailListLaunch,
+} = require('./handlers/emailList/postEmailListLaunch');
 /* const { updateThemeById } = require('./handlers/themes/updateThemeById');
 const { deleteThemeById } = require('./handlers/themes/deleteThemeById'); */
 
@@ -56,6 +60,9 @@ express()
 	/* 	.post('/newtheme/:_id', postNewThemeById) */
 	/* 	.patch('/newtheme/:_id', updateThemeById)
 	.delete('/newtheme/:_id', deleteThemeById) */
+
+	// email list Launch
+	.post('/emailListLaunch', postEmailListLaunch)
 
 	.listen(port, () => {
 		console.log(`Example app listening on port ${port}`);

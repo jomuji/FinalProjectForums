@@ -14,7 +14,6 @@ const options = {
 const postNewTheme = async (req, res) => {
 	// Request newTheme from body
 	const { theme, email, lien } = req.body;
-	console.log(req.body, 'req.body');
 	const generatedId = uuidv4();
 
 	// CALL client  from MongoDB
