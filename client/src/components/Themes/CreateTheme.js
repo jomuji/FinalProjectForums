@@ -1,46 +1,42 @@
 import React from 'react';
+import 'draft-js/dist/Draft.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { Editor, EditorState } from 'draft-js';
+
+/* import MyEditor from './Editor'; */
 
 const CreateTheme = () => {
-	/* const [reloadState, setReloadState] = useState(false); */
+	const [reloadState, setReloadState] = useState(false);
 	const { user, isAuthenticated } = useAuth0();
 	const indicatorSize = 80;
 	const { lien } = useParams();
 	const [themesByID, setThemesbyId] = useState(null);
 	const [theme, setTheme] = useState('');
 	const [disableButton, setDisableButton] = useState(true);
-	const [colorStyling, setColorStyling] = useState('grey');
-	const [editorState, setEditorState] = useState(() =>
-		EditorState.createEmpty()
-	);
+
+	useEffect(() => {}, [disableButton]);
 
 	useEffect(() => {
-		console.log(disableButton);
-	}, [disableButton]);
-
-	useEffect(() => {
-		console.log('hello');
 		fetch(`/themesbymodules/${lien}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setThemesbyId(data.data);
-				console.log(data);
 			})
 			.catch((err) => {
 				console.log('err', err);
 			});
-	}, []);
-	// reload state
+	}, [reloadState]);
+
+	console.log(themesByID, 'ThemeBYID');
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const email = user.email;
-		/* const theme = themesByID.theme; */
+		const username = user.name;
 
 		const requestOptions = {
 			method: 'POST',
@@ -49,13 +45,14 @@ const CreateTheme = () => {
 				theme,
 				email,
 				lien,
+				username,
 			}),
 		};
 
 		fetch('/newtheme', requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				/* 	setReloadState(!reloadState); */
+				setReloadState(!reloadState);
 				setTheme('');
 			})
 			.catch((error) => {
@@ -65,28 +62,39 @@ const CreateTheme = () => {
 
 	const handleChange = (e) => {
 		setTheme(e.target.value);
-		const textLengthremainder = 280 - e.target.value.length;
 
 		if (!isAuthenticated) {
 			setDisableButton(true);
 			window.alert(
 				'Veuillez vous connecter avec des identifiants pour participer au forum.'
 			);
-		} else if (textLengthremainder <= 0) {
-			setColorStyling('#FB483B');
-			setDisableButton(true);
-		} else if (textLengthremainder <= 55) {
-			setColorStyling('#FDA346');
-			setDisableButton(false);
-		} else {
-			setColorStyling('grey');
-			setDisableButton(false);
 		}
 	};
+	/* return <MyEditor />; */
 
 	return (
 		<>
-			{!themesByID ? (
+			{themesByID || themesByID === undefined ? (
+				<Form
+					onSubmit={(e) => {
+						handleSubmit(e);
+					}}
+				>
+					<textarea
+						placeholder='Créez un nouveau fil de discussion'
+						value={theme}
+						onChange={(e) => {
+							handleChange(e);
+						}}
+					></textarea>
+
+					<ButtonWrapper>
+						<Button type='submit' disabled={disableButton}>
+							CRÉER
+						</Button>
+					</ButtonWrapper>
+				</Form>
+			) : (
 				<CircularProgress
 					size={indicatorSize}
 					sx={{
@@ -98,32 +106,6 @@ const CreateTheme = () => {
 						color: '#FADA80',
 					}}
 				/>
-			) : (
-				<Form
-					onSubmit={(e) => {
-						handleSubmit(e);
-					}}
-				>
-					<textarea
-						placeholder='Créez un nouveau thème de conversation'
-						value={theme}
-						onChange={(e) => {
-							handleChange(e);
-						}}
-					></textarea>
-
-					<Editor editorState={editorState} onChange={setEditorState} />
-
-					<ButtonWrapper>
-						<TextLimit style={{ color: colorStyling }}>
-							{280 - theme.length}
-						</TextLimit>
-
-						<Button type='submit' disabled={disableButton}>
-							CRÉER
-						</Button>
-					</ButtonWrapper>
-				</Form>
 			)}
 		</>
 	);
@@ -138,7 +120,7 @@ const Form = styled.form`
 	border-radius: 15px;
 	padding: 1em;
 	width: 344px;
-
+	margin-top: 1em;
 	textarea {
 		margin-bottom: 1em;
 		height: 100px;

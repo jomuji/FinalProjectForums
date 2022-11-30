@@ -27,8 +27,8 @@ const {
 const {
 	postEmailListLaunch,
 } = require('./handlers/emailList/postEmailListLaunch');
-/* const { updateThemeById } = require('./handlers/themes/updateThemeById');
-const { deleteThemeById } = require('./handlers/themes/deleteThemeById'); */
+/*  const { updateThemeById } = require('./handlers/themes/updateThemeById'); */
+const { deleteThemeById } = require('./handlers/themes/deleteThemeById');
 
 const port = 8000;
 
@@ -61,9 +61,9 @@ express()
 	// theme endpoints
 	.get('/themesbymodules/:lien', getThemesByModulesLien)
 	.post('/newtheme', postNewTheme)
+	.delete('/deletethemeById/:_id', deleteThemeById)
 	/* 	.post('/newtheme/:_id', postNewThemeById) */
-	/* 	.patch('/newtheme/:_id', updateThemeById)
-	.delete('/newtheme/:_id', deleteThemeById) */
+	/* 	.patch('/newtheme/:_id', updateThemeById) */
 
 	// email list Launch
 	.post('/emailListLaunch', postEmailListLaunch)

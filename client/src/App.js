@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Programme from './pages/Programme/index';
 import ProgrammeModule from './pages/Programme/ProgrammeModule';
 import UserProfile from './pages/UserProfile';
+import Theme from './pages/Forums/Theme';
 
 const App = () => {
 	/// USER IDENTIFICATION GET OR CREATE NEW
@@ -49,6 +50,7 @@ const App = () => {
 				<Route path='/programme/:modules' element={<ProgrammeModule />} />
 				<Route path='/forums' element={<Forums />} />
 				<Route path='/forums/:lien' element={<ForumsModule />} />
+				<Route path='/forums/fil/:_id' element={<Theme />} />
 				<Route path='/equipe' element={<Equipe />} />
 			</Routes>
 		</BrowserRouter>

@@ -39,7 +39,7 @@ const Footer = () => {
 					<SectionDate>
 						<Date>Lancement en avril 2023</Date>
 						<Rejoignez>
-							Rejoignez notre liste de diffusion pour vous tenir au courant du
+							Rejoignez la liste de diffusion pour vous tenir au courant du
 							lancement du programme:
 						</Rejoignez>
 

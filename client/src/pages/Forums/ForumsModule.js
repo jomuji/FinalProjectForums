@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CreateTheme from '../../components/Themes/CreateTheme';
 import { CircularProgress } from '@mui/material';
-import ThemePost from '../../components/Themes/ThemePost';
+import ThemeThread from '../../components/Themes/ThemeThread';
 
 const ForumsModule = () => {
 	const indicatorSize = 80;
@@ -47,10 +47,10 @@ const ForumsModule = () => {
 						<TitrePage>
 							FORUM: <Titre>{title}</Titre>
 						</TitrePage>
+						<CreateTheme />
+						<TitreFils>Fils de discussion</TitreFils>
+						<ThemeThread />
 					</Wrapper>
-
-					<CreateTheme />
-					<ThemePost />
 				</>
 			)}
 		</>
@@ -68,7 +68,12 @@ const Wrapper = styled.div`
 
 const TitrePage = styled.h1`
 	font-weight: 700;
-	margin-bottom: 1.5em;
+`;
+
+const TitreFils = styled.h1`
+	font-weight: 700;
+	margin-top: 1em;
+	margin-bottom: 1em;
 `;
 
 const Titre = styled.span`

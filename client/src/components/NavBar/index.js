@@ -202,6 +202,11 @@ const NavWrapper = styled.div`
 		&:hover {
 			color: var(--red);
 		}
+
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
 	}
 `;
 
