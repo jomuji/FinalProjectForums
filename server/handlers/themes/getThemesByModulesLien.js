@@ -12,7 +12,6 @@ const options = {
 // RETURN AN ARRAY OF ALL MODULES BY MODULE WILL USE TO USEPARAMS
 
 const getThemesByModulesLien = async (req, res) => {
-	console.log('Hello');
 	// CREATE A NEW CLIENT
 	const client = new MongoClient(MONGO_URI, options);
 

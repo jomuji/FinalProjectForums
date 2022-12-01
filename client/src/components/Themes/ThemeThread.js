@@ -8,12 +8,11 @@ import { NavLink } from 'react-router-dom';
 
 const ThemeThread = () => {
 	const indicatorSize = 80;
-	const { user, isAuthenticated } = useAuth0();
+	const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 	const { lien } = useParams();
 	const [themesByModule, setThemesByModule] = useState(null);
 	const [deletedThemeId, setDeletedThemeId] = useState(null);
 
-	// fetch data getModulesById '/modules/:_id'
 	useEffect(() => {
 		fetch(`/themesbymodules/${lien}`)
 			.then((res) => res.json())
@@ -33,11 +32,18 @@ const ThemeThread = () => {
 	const handleDeleteClick = (e, _id) => {
 		e.preventDefault();
 
+		const email = user.email;
+		const username = user.name;
+
 		const requestOptions = {
 			method: 'DELETE',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				_id,
+				lien,
+				username,
+				email,
+				///ajouter les autres
 			}),
 		};
 
@@ -50,6 +56,8 @@ const ThemeThread = () => {
 				console.log(error);
 			});
 	};
+
+	// fetch data getModulesById '/modules/:_id'
 
 	//onClick function to handle if a theme is updatefrom thread
 	/* 	const handleUpdateClick = (e) => {
@@ -76,6 +84,71 @@ const ThemeThread = () => {
 	//		}); */ */
 	//};
 
+	const WrapperSection = () => {
+		if (isLoading) {
+			console.log(isLoading, 'IS LOADING');
+			return (
+				<CircularProgress
+					size={indicatorSize}
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						marginTop: `${-indicatorSize / 2}px`,
+						marginLeft: `${-indicatorSize / 2}px`,
+						color: '#FADA80',
+					}}
+				/>
+			);
+		} else if (!isAuthenticated) {
+			console.log(isAuthenticated, 'IS AUTH');
+			return (
+				<Wrapper>
+					{themesByModule.map((theme) => (
+						<ThemeSection>
+							<Nav key={theme._id} to={`/forums/fil/${theme._id}`}>
+								<ThemePost>{theme.theme}</ThemePost>
+							</Nav>
+							<UserName>
+								<Bold>Par: </Bold>
+								{theme.username}
+							</UserName>
+						</ThemeSection>
+					))}
+				</Wrapper>
+			);
+		} else {
+			return (
+				<Wrapper>
+					{themesByModule.map((theme) => (
+						<ThemeSection>
+							<Nav key={theme._id} to={`/forums/fil/${theme._id}`}>
+								<ThemePost>{theme.theme}</ThemePost>
+							</Nav>
+							<UserName>
+								<Bold>Par: </Bold>
+								{theme.username}
+							</UserName>
+
+							{user.name === theme.username && (
+								<ButtonSection>
+									<UpdateButton /* onClick={handleUpdateClick} */>
+										METTRE À JOUR
+									</UpdateButton>
+									<DeleteButton
+										onClick={(e) => handleDeleteClick(e, theme._id)}
+									>
+										EFFACER
+									</DeleteButton>
+								</ButtonSection>
+							)}
+						</ThemeSection>
+					))}
+				</Wrapper>
+			);
+		}
+	};
+
 	return (
 		<>
 			{!themesByModule ? (
@@ -91,42 +164,23 @@ const ThemeThread = () => {
 					}}
 				/>
 			) : (
-				<Wrapper>
-					{themesByModule.map((theme) => (
-						<ThemeSection>
-							<Nav key={theme._id} to={`/forums/fil/${theme._id}`}>
-								<ThemePost>{theme.theme}</ThemePost>
-							</Nav>
-							<UserName>
-								<Bold>Par: </Bold>
-								{theme.username}
-							</UserName>
-
-							<ButtonSection>
-								<UpdateButton /* onClick={handleUpdateClick} */>
-									METTRE À JOUR
-								</UpdateButton>
-								<DeleteButton onClick={(e) => handleDeleteClick(e, theme._id)}>
-									EFFACER
-								</DeleteButton>
-							</ButtonSection>
-						</ThemeSection>
-					))}
-				</Wrapper>
+				WrapperSection()
 			)}
 		</>
 	);
 };
 
 export default ThemeThread;
+
 const Wrapper = styled.div`
 	max-width: 344px;
 `;
-const ThemeSection = styled.div``;
+const ThemeSection = styled.div`
+	margin-bottom: 1.2em;
+`;
 
 const Nav = styled(NavLink)`
-		color: var(--red);
-	}
+	color: var(--red);
 `;
 
 const ThemePost = styled.a`
@@ -140,7 +194,7 @@ const Bold = styled.span`
 `;
 
 const UserName = styled.p`
-	margin-top: 1em;
+	margin-top: 0.8em;
 	text-align: right;
 `;
 

@@ -8,6 +8,9 @@ const { updateUserByEmail } = require('./handlers/users/updateUserByEmail');
 const {
 	getOrCreateUserByEmail,
 } = require('./handlers/users/getOrCreateUserByEmail');
+
+const { getThemesByUser } = require('./handlers/users/getThemesByUser');
+
 // handlers MODULES
 const { getAllModules } = require('./handlers/modules/getAllModules');
 const { getModulesTitles } = require('./handlers/modules/getModulesTitles');
@@ -50,6 +53,7 @@ express()
 
 	.patch('/user/:email', updateUserByEmail)
 	.post('/user/:email', getOrCreateUserByEmail)
+	.get('/userThemes/:email', getThemesByUser)
 
 	// modules endpoints
 	.get('/modules', getAllModules)

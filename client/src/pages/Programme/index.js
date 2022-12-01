@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+/* import { useAuth0 } from '@auth0/auth0-react'; */
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
@@ -7,8 +7,8 @@ import { ImSphere, ImGift } from 'react-icons/im';
 import { FiClock } from 'react-icons/fi';
 
 // components
-import LoginButton from '../../components/LoginButton';
-import LogoutButton from '../../components/LogoutButton';
+/* import LoginButton from '../../components/LoginButton';
+import LogoutButton from '../../components/LogoutButton'; */
 import Footer from '../../components/Footer';
 
 // context
@@ -17,7 +17,7 @@ import { AllModulesContext } from '../../components/Context/AllModulesContext';
 const Programme = () => {
 	const indicatorSize = 80;
 	const { modules } = useContext(AllModulesContext);
-	const { isAuthenticated } = useAuth0();
+	/* 	const { isAuthenticated } = useAuth0(); */
 	let titre = null;
 
 	return (
@@ -82,9 +82,6 @@ const Programme = () => {
 					</Apropos>
 					<ForumsSection>
 						{modules.map((module) => {
-							{
-								console.log(module, 'MODULE');
-							}
 							if (!module) {
 								<CircularProgress
 									size={indicatorSize}
