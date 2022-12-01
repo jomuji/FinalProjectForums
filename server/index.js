@@ -27,7 +27,7 @@ const {
 const {
 	postEmailListLaunch,
 } = require('./handlers/emailList/postEmailListLaunch');
-/*  const { updateThemeById } = require('./handlers/themes/updateThemeById'); */
+const { updateThemeById } = require('./handlers/themes/updateThemeById');
 const { deleteThemeById } = require('./handlers/themes/deleteThemeById');
 
 const port = 8000;
@@ -62,8 +62,7 @@ express()
 	.get('/themesbymodules/:lien', getThemesByModulesLien)
 	.post('/newtheme', postNewTheme)
 	.delete('/deletethemeById/:_id', deleteThemeById)
-	/* 	.post('/newtheme/:_id', postNewThemeById) */
-	/* 	.patch('/newtheme/:_id', updateThemeById) */
+	.patch('/updatetheme/:_id', updateThemeById)
 
 	// email list Launch
 	.post('/emailListLaunch', postEmailListLaunch)

@@ -15,7 +15,7 @@ const deleteThemeById = async (req, res) => {
 	// Request from body
 	const { _id } = req.params;
 	const { email, lien } = req.body;
-	console.log(email, lien);
+
 	// CREATE A NEW CLIENT
 	const client = new MongoClient(MONGO_URI, options);
 
