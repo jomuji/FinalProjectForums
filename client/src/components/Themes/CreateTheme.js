@@ -31,8 +31,6 @@ const CreateTheme = () => {
 			});
 	}, [reloadState]);
 
-	console.log(themesByID, 'ThemeBYID');
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -63,23 +61,13 @@ const CreateTheme = () => {
 
 	const handleChange = (e) => {
 		setTheme(e.target.value);
-		/* 	const textLengthremainder = 280 - e.target.value.length; */
 
 		if (!isAuthenticated) {
 			setDisableButton(true);
 			window.alert(
 				'Veuillez vous connecter avec des identifiants pour participer au forum.'
 			);
-		} /* else if (textLengthremainder <= 0) {
-			setColorStyling('#FB483B');
-			setDisableButton(true);
-		} else if (textLengthremainder <= 55) {
-			setColorStyling('#FDA346');
-			setDisableButton(false);
-		} else {
-			setColorStyling('grey');
-			setDisableButton(false);
-		} */
+		}
 	};
 	/* return <MyEditor />; */
 

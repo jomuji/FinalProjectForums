@@ -27,6 +27,39 @@ const ThemeThread = () => {
 		// DEPENDENCY: TRIGGERED WHEN LIEN PARAMS CHANGES
 	}, [lien]);
 
+	//onClick function to handle if a theme is removed from thread
+	const handleClick = (e) => {
+		//this will trigger if a item has been deleted and will cause the cart to rerender
+		/* 		setDeletedItem(true); */
+		e.preventDefault();
+		/*    const _id; */
+		fetch('/updatetheme/:_id', {
+			//fetch request that will DELETE the theme from DB
+			method: 'DELETE',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				/* _id */
+			}),
+		})
+			.then((data) => {
+				return data.json();
+			})
+			.then((data) => {
+				//if this successful in deleting
+				if (data.status === 200) {
+					//DB then it will also remove theme from frontend
+					/* 	setDeletedItem(false);  */
+					//and also return the delete trigger to false
+				}
+			})
+			.catch((error) => {
+				return error;
+			});
+	};
+
 	return (
 		<>
 			{!themesByModule ? (
@@ -55,7 +88,7 @@ const ThemeThread = () => {
 
 							<ButtonSection>
 								<UpdateButton>METTRE À JOUR</UpdateButton>
-								<DeleteButton>EFFACER</DeleteButton>
+								<DeleteButton onClick={handleClick}>EFFACER</DeleteButton>
 							</ButtonSection>
 						</ThemeSection>
 					))}
