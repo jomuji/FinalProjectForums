@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
@@ -7,8 +8,10 @@ import { NavLink } from 'react-router-dom';
 
 const ThemeThread = () => {
 	const indicatorSize = 80;
+	const { user, isAuthenticated } = useAuth0();
 	const { lien } = useParams();
 	const [themesByModule, setThemesByModule] = useState(null);
+	const [deletedThemeId, setDeletedThemeId] = useState(null);
 
 	// fetch data getModulesById '/modules/:_id'
 	useEffect(() => {
@@ -17,7 +20,6 @@ const ThemeThread = () => {
 			.then(
 				// When the data is received, update setModuleById
 				(data) => {
-					console.log(data);
 					setThemesByModule(data.data);
 				}
 			)
@@ -25,40 +27,54 @@ const ThemeThread = () => {
 				console.log(error);
 			});
 		// DEPENDENCY: TRIGGERED WHEN LIEN PARAMS CHANGES
-	}, [lien]);
+	}, [lien, deletedThemeId]);
 
 	//onClick function to handle if a theme is removed from thread
-	const handleClick = (e) => {
-		//this will trigger if a item has been deleted and will cause the cart to rerender
-		/* 		setDeletedItem(true); */
+	const handleDeleteClick = (e, _id) => {
 		e.preventDefault();
-		/*    const _id; */
-		fetch('/updatetheme/:_id', {
-			//fetch request that will DELETE the theme from DB
+
+		const requestOptions = {
 			method: 'DELETE',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				/* _id */
+				_id,
 			}),
-		})
+		};
+
+		fetch(`/deletethemeById/${_id}`, requestOptions)
+			.then((response) => response.json())
 			.then((data) => {
-				return data.json();
-			})
-			.then((data) => {
-				//if this successful in deleting
-				if (data.status === 200) {
-					//DB then it will also remove theme from frontend
-					/* 	setDeletedItem(false);  */
-					//and also return the delete trigger to false
-				}
+				setDeletedThemeId(data._id);
 			})
 			.catch((error) => {
-				return error;
+				console.log(error);
 			});
 	};
+
+	//onClick function to handle if a theme is updatefrom thread
+	/* 	const handleUpdateClick = (e) => {
+		e.preventDefault(); */
+
+	/* const _id; */
+
+	/* 	const requestOptions = {
+			method: 'PATCH',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				/* _id, */
+	//	}),
+	//};
+
+	/* 		fetch('/updatetheme/:_id', requestOptions)
+			.then((response) => response.json())
+			.then((data) => {
+				setReloadState(!reloadState);
+				/* setTheme(''); */
+	//	})
+	//.catch((error) => {
+	//	console.log(error);
+	//		}); */ */
+	//};
 
 	return (
 		<>
@@ -79,7 +95,7 @@ const ThemeThread = () => {
 					{themesByModule.map((theme) => (
 						<ThemeSection>
 							<Nav key={theme._id} to={`/forums/fil/${theme._id}`}>
-								<Theme>{theme.theme}</Theme>
+								<ThemePost>{theme.theme}</ThemePost>
 							</Nav>
 							<UserName>
 								<Bold>Par: </Bold>
@@ -87,8 +103,12 @@ const ThemeThread = () => {
 							</UserName>
 
 							<ButtonSection>
-								<UpdateButton>METTRE À JOUR</UpdateButton>
-								<DeleteButton onClick={handleClick}>EFFACER</DeleteButton>
+								<UpdateButton /* onClick={handleUpdateClick} */>
+									METTRE À JOUR
+								</UpdateButton>
+								<DeleteButton onClick={(e) => handleDeleteClick(e, theme._id)}>
+									EFFACER
+								</DeleteButton>
 							</ButtonSection>
 						</ThemeSection>
 					))}
@@ -109,7 +129,7 @@ const Nav = styled(NavLink)`
 	}
 `;
 
-const Theme = styled.a`
+const ThemePost = styled.a`
 	font-weight: 700;
 	font-size: 1.2em;
 	text-decoration: underline;
@@ -140,6 +160,6 @@ const UpdateButton = styled.a`
 	text-decoration: underline;
 `;
 
-const DeleteButton = styled.a`
+const DeleteButton = styled.button`
 	text-decoration: underline;
 `;

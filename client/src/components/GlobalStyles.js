@@ -51,7 +51,7 @@ export default createGlobalStyle`
       display: block;
   }
   body {
-    line-height: 1; 
+    line-height: 1.2; 
       margin: 0px;
       font-family: var(--font);
       background-color: #fffaea;

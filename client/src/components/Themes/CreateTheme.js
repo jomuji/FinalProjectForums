@@ -6,17 +6,16 @@ import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
-import MyEditor from './Editor';
+/* import MyEditor from './Editor'; */
 
 const CreateTheme = () => {
-	const [reloadState, setReloadState] = useState(false);
 	const { user, isAuthenticated } = useAuth0();
 	const indicatorSize = 80;
 	const { lien } = useParams();
 	const [themesByID, setThemesbyId] = useState(null);
 	const [theme, setTheme] = useState('');
-	const [disableButton, setDisableButton] = useState(true);
-	/* const [colorStyling, setColorStyling] = useState('grey'); */
+	const [disableButton, setDisableButton] = useState(false);
+	const [themeInsertedId, setThemeInsertedId] = useState(null);
 
 	useEffect(() => {}, [disableButton]);
 
@@ -29,7 +28,7 @@ const CreateTheme = () => {
 			.catch((err) => {
 				console.log('err', err);
 			});
-	}, [reloadState]);
+	}, [lien, themeInsertedId]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -51,7 +50,7 @@ const CreateTheme = () => {
 		fetch('/newtheme', requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				setReloadState(!reloadState);
+				setThemeInsertedId(data.data.insertedId);
 				setTheme('');
 			})
 			.catch((error) => {
@@ -88,10 +87,6 @@ const CreateTheme = () => {
 					></textarea>
 
 					<ButtonWrapper>
-						{/* 						<TextLimit style={{ color: colorStyling }}>
-							{280 - theme.length}
-						</TextLimit> */}
-
 						<Button type='submit' disabled={disableButton}>
 							CRÉER
 						</Button>

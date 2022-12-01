@@ -30,9 +30,7 @@ const App = () => {
 
 			fetch(`http://localhost:8000/user/${user.email}`, requestOptions)
 				.then((response) => response.json())
-				.then((data) => {
-					console.log(data, 'DATA POST');
-				})
+				.then((data) => {})
 				.catch((error) => {
 					console.log(error);
 				});

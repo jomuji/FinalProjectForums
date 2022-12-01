@@ -54,7 +54,7 @@ const deleteThemeById = async (req, res) => {
 		);
 		// send response back to frontend as well
 		if (result) {
-			return res.status(200).json({ data: result });
+			return res.status(200).json({ data: result, _id });
 		}
 
 		if (deleteThemeIdInUser) {

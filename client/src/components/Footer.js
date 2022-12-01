@@ -37,7 +37,7 @@ const Footer = () => {
 			<Wrapper>
 				<FirstSection>
 					<SectionDate>
-						<Date>Lancement en avril 2023</Date>
+						<Date>Lancement en juin 2023</Date>
 						<Rejoignez>
 							Rejoignez la liste de diffusion pour vous tenir au courant du
 							lancement du programme:
@@ -78,7 +78,7 @@ export default Footer;
 
 const Wrapper = styled.section`
 	position: relative;
-	height: 400px;
+	height: 420px;
 	background-color: #4083bb;
 	display: flex;
 	flex-direction: column;
@@ -87,7 +87,7 @@ const Wrapper = styled.section`
 	img {
 		position: absolute;
 		z-index: 0;
-		bottom: 0;
+		bottom: -30px;
 		right: 0;
 	}
 `;
@@ -110,7 +110,7 @@ const Date = styled.div`
 	font-size: 1.8em;
 	z-index: 1000;
 	position: absolute;
-	top: 57.6px;
+	top: 73.6px;
 	left: 16px;
 `;
 
@@ -119,7 +119,7 @@ const Rejoignez = styled.div`
 	margin-top: 1em;
 	z-index: 1000;
 	position: absolute;
-	top: 89.6px;
+	top: 105.6px;
 	left: 16px;
 `;
 
@@ -127,17 +127,19 @@ const Reussir = styled.div`
 	max-width: 300px;
 	margin-top: 1em;
 	font-style: italic;
+	font-size: 1em;
 	z-index: 1000;
 	position: absolute;
-	top: 153.6px;
+	top: 177.6px;
 	left: 16px;
+	color: #fada80;
 `;
 
 const Form = styled.form`
 	display: flex;
 	flex-direction: row;
 	gap: 1em;
-	padding-top: 132px;
+	padding-top: 166px;
 	padding-left: 16px;
 	padding-right: 16px;
 	padding-bottom: 2em;
@@ -191,4 +193,8 @@ const GreenSection = styled.div`
 	padding-right: 16px;
 	padding-top: 2em;
 	padding-bottom: 2em;
+	z-index: 1000;
+	position: relative;
+	bottom: 0;
+	right: 0;
 `;

@@ -228,6 +228,7 @@ const Logo = styled.div`
 `;
 
 const TitreLogo = styled.p`
+	line-height: 1;
 	&:hover {
 		color: var(--darkgrey);
 	}
