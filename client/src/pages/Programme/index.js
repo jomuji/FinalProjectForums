@@ -3,10 +3,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { ImSphere, ImGift } from 'react-icons/im';
+import { FiClock } from 'react-icons/fi';
 
 // components
 import LoginButton from '../../components/LoginButton';
 import LogoutButton from '../../components/LogoutButton';
+import Footer from '../../components/Footer';
 
 // context
 import { AllModulesContext } from '../../components/Context/AllModulesContext';
@@ -34,9 +37,49 @@ const Programme = () => {
 			) : (
 				<Wrapper>
 					<TitreSection>
-						<TitrePage>PROGRAMME</TitrePage>
-						{isAuthenticated ? <LogoutButton /> : <LoginButton />}
+						<TitrePage>
+							Réussir le démarrage d'une communauté de pratique
+						</TitrePage>
+						{/* 					{isAuthenticated ? <LogoutButton /> : <LoginButton />} */}
 					</TitreSection>
+					<Apropos>
+						<Introduction>
+							<p>
+								<Bold>À PROPOS DE CE PROGRAMME</Bold>
+							</p>
+							<p>
+								Il s'adresse aux<Bold> facilitatrices </Bold>et
+								<Bold> facilitateurs </Bold>de communauté de pratique
+							</p>
+							<p>
+								Il vous donnera une démarche structurée pour démarrer une
+								<Bold> communauté de pratique</Bold>, qui sera
+								<Bold> mobilisatrice </Bold>
+								et<Bold> pérenne </Bold>
+							</p>
+						</Introduction>
+
+						<Table>
+							<tr>
+								<td>
+									<ImSphere />
+								</td>
+								<td>100% en ligne et asynchrone</td>
+							</tr>
+							<tr>
+								<td>
+									<FiClock />
+								</td>
+								<td>Env. 5hrs pour compléter</td>
+							</tr>
+							<tr>
+								<td>
+									<ImGift />
+								</td>
+								<td>Sans frais</td>
+							</tr>
+						</Table>
+					</Apropos>
 					<ForumsSection>
 						{modules.map((module) => {
 							{
@@ -60,10 +103,10 @@ const Programme = () => {
 							}
 
 							return (
-								<NavLink key={module.lien} to={`/forums/${module.lien}`}>
+								<NavLink key={module.lien} to={`/programme/${module.lien}`}>
 									<ModuleSection>
 										<FirstSection>
-											<Id>{module._id}</Id> <Forum>FORUM</Forum>
+											<Id>{module._id}</Id> <Forum>MODULE</Forum>
 										</FirstSection>
 
 										<SecondSection>
@@ -84,7 +127,11 @@ const Programme = () => {
 											)}
 
 											<Objectif>{module.objectif}</Objectif>
-											<Question></Question>
+											<Question>
+												{module.questions.map((question) => (
+													<li>{question}</li>
+												))}
+											</Question>
 										</SecondSection>
 									</ModuleSection>
 								</NavLink>
@@ -93,6 +140,7 @@ const Programme = () => {
 					</ForumsSection>
 				</Wrapper>
 			)}
+			<Footer />
 		</>
 	);
 };
@@ -115,6 +163,42 @@ const TitrePage = styled.h1`
 	font-weight: 700;
 `;
 
+const Apropos = styled.section`
+	margin-top: 2em;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 2em;
+`;
+
+const Introduction = styled.p`
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	color: var(--lightgrey);
+	margin-bottom: 1em;
+	width: 343px;
+`;
+
+const Bold = styled.span`
+	font-weight: 700;
+`;
+
+const Table = styled.section`
+	color: #4083bb;
+	font-weight: 700;
+	width: 450px;
+
+	tr {
+		display: flex;
+		flex-direction: row;
+		gap: 1em;
+		padding-bottom: 1em;
+	}
+
+	td {
+	}
+`;
 const ForumsSection = styled.section`
 	display: flex;
 	flex-direction: column;
@@ -138,15 +222,27 @@ const FirstSection = styled.div`
 `;
 
 const Id = styled.div`
-	font-size: 4em;
+	font-size: 6em;
 `;
 const Forum = styled.div``;
 
 const SecondSection = styled.section`
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 0.5em;
 	text-align: left;
 `;
 
-const Question = styled.section``;
+const Question = styled.ul`
+	padding-left: 1em;
+	color: var(--lightgrey);
+	font-style: italic;
+	list-style-type: disc;
+
+	li {
+	}
+`;
 
 const Objectif = styled.div`
 	font-size: 1em;
