@@ -85,7 +85,7 @@ const Footer = () => {
 					</LicenseLogo>
 
 					<p>
-						License:
+						<Bold>license: </Bold>
 						<a
 							href='https://creativecommons.org/licenses/by-nc/4.0/deed.fr'
 							target='_blank'
@@ -95,14 +95,14 @@ const Footer = () => {
 					</p>
 
 					<p>
-						attribution:
+						<Bold>attribution: </Bold>
 						<Link to='/programme'>
-							Réussir le démarrage d'une communauté
+							Réussir le démarrage d'une communauté de pratique
 						</Link>{' '}
 					</p>
 
 					<p>
-						par:
+						<Bold>par: </Bold>
 						<Link to='/equipe'> l'équipe d'Ailleurs conseil</Link>
 					</p>
 				</LicenseSection>
@@ -237,6 +237,7 @@ const GreenSection = styled.div`
 `;
 
 const LicenseSection = styled.div`
+	font-size: 0.8em;
 	img {
 		width: 1.8em;
 	}
@@ -245,5 +246,10 @@ const LicenseSection = styled.div`
 const LicenseLogo = styled.a`
 	display: flex;
 	flex-direction: row;
-	gap: 0.8em;
+	gap: 0.6em;
+	margin-bottom: 0.6em;
+`;
+
+const Bold = styled.span`
+	font-weight: 700;
 `;

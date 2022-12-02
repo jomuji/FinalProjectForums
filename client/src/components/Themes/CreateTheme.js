@@ -121,6 +121,11 @@ const Form = styled.form`
 	textarea {
 		margin-bottom: 1em;
 		height: 100px;
+		&:focus {
+			outline: none !important;
+			border: 1px solid #fada80;
+			box-shadow: 0 0 10px #fada80;
+		}
 	}
 `;
 

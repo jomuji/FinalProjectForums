@@ -193,7 +193,7 @@ const NavWrapper = styled.div`
 	justify-content: space-between;
 	position: fixed;
 	background-color: #fffaea;
-	z-index: 1000;
+	z-index: 2000;
 	top: 0;
 	transition-timing-function: ease-in;
 	transition: 0.5s;

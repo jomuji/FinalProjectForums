@@ -37,7 +37,7 @@ export const ThemeSection = ({
 	return (
 		<Section>
 			{isUpdating ? (
-				<>
+				<UpdatingSection>
 					<textarea
 						placeholder='Que voulez-vous dire?'
 						value={updateTheme}
@@ -45,46 +45,56 @@ export const ThemeSection = ({
 							handleChange(e);
 						}}
 					></textarea>
-					<button
-						onClick={(e) => {
-							setIsUpdating(!isUpdating);
-						}}
-					>
-						CANCEL
-					</button>
-					<button
-						onClick={(e) => {
-							handleUpdateClick(e, id, updateTheme);
-							setIsUpdating(!isUpdating);
-						}}
-					>
-						UPDATE
-					</button>
-				</>
+
+					<ButtonSection>
+						<CancelButton
+							onClick={(e) => {
+								setIsUpdating(!isUpdating);
+							}}
+						>
+							ANNULER
+						</CancelButton>
+						<PublishButton
+							onClick={(e) => {
+								handleUpdateClick(e, id, updateTheme);
+								setIsUpdating(!isUpdating);
+							}}
+						>
+							PUBLIER
+						</PublishButton>
+					</ButtonSection>
+
+					<UserName>
+						<Bold>Par: </Bold>
+						{username}
+					</UserName>
+				</UpdatingSection>
 			) : (
-				<Nav to={`/forums/fil/${id}`}>
-					<ThemePost>{theme}</ThemePost>
-				</Nav>
-			)}
+				<>
+					<Nav to={`/forums/fil/${id}`}>
+						<ThemePost>{theme}</ThemePost>
+					</Nav>
 
-			<UserName>
-				<Bold>Par: </Bold>
-				{username}
-			</UserName>
+					<UserName>
+						<Bold>Par: </Bold>
+						{username}
+					</UserName>
 
-			{user.name === username && (
-				<ButtonSection>
-					<UpdateButton
-						onClick={(e) => {
-							setIsUpdating(!isUpdating);
-						}}
-					>
-						METTRE À JOUR
-					</UpdateButton>
-					<DeleteButton onClick={(e) => handleDeleteClick(e, id)}>
-						EFFACER
-					</DeleteButton>
-				</ButtonSection>
+					{user.name === username && (
+						<ButtonSection>
+							<UpdateButton
+								onClick={(e) => {
+									setIsUpdating(!isUpdating);
+								}}
+							>
+								METTRE À JOUR
+							</UpdateButton>
+							<DeleteButton onClick={(e) => handleDeleteClick(e, id)}>
+								EFFACER
+							</DeleteButton>
+						</ButtonSection>
+					)}
+				</>
 			)}
 		</Section>
 	);
@@ -92,6 +102,21 @@ export const ThemeSection = ({
 
 const Section = styled.div`
 	margin-bottom: 1.2em;
+	border-bottom: 0.2em dotted #fada80;
+`;
+
+const UpdatingSection = styled.div`
+	margin-bottom: 0.8em;
+	textarea {
+		width: 343px;
+		height: 50px;
+
+		&:focus {
+			outline: none !important;
+			border: 1px solid #fada80;
+			box-shadow: 0 0 10px #fada80;
+		}
+	}
 `;
 
 const Nav = styled(NavLink)`
@@ -121,14 +146,36 @@ const ButtonSection = styled.section`
 	gap: 1em;
 	margin-top: 0.8em;
 	margin-bottom: 0.8em;
-	padding-bottom: 0.8em;
-	border-bottom: 0.2em dotted #fada80;
 `;
 
-const UpdateButton = styled.a`
+const UpdateButton = styled.button`
 	text-decoration: underline;
+	background-color: var(--beige);
+	&:hover {
+		color: var(--red);
+	}
 `;
 
 const DeleteButton = styled.button`
 	text-decoration: underline;
+	background-color: var(--beige);
+	&:hover {
+		color: var(--red);
+	}
+`;
+
+const CancelButton = styled.button`
+	text-decoration: underline;
+	background-color: var(--beige);
+	&:hover {
+		color: var(--red);
+	}
+`;
+
+const PublishButton = styled.button`
+	text-decoration: underline;
+	background-color: var(--beige);
+	&:hover {
+		color: var(--red);
+	}
 `;
