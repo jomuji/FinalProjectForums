@@ -1,15 +1,19 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
+import CommentThread from '../../components/Comment/CommentThread';
 
 const Theme = () => {
 	const indicatorSize = 80;
+	const { user, isAuthenticated } = useAuth0();
 	const { _id } = useParams();
 	const [themeById, setThemeById] = useState(null);
 	const [comment, setComment] = useState('');
-  const [commentInsertedId, setCommentInsertedId] = useState(null);
+	const [disableButton, setDisableButton] = useState(false);
+	const [commentInsertedId, setCommentInsertedId] = useState(null);
 
 	useEffect(() => {}, [disableButton]);
 
@@ -24,27 +28,30 @@ const Theme = () => {
 				console.log(error);
 			});
 		// DEPENDENCY: TRIGGERED WHEN _id PARAMS CHANGES
-	}, [_id]);
+	}, [_id, commentInsertedId]);
+
+	console.log(themeById, 'THEMEBYID');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const email = user.email;
 		const username = user.name;
+		const lien = themeById[0].theme;
 
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				comment,
-				theme,
-        email,
+				_id,
+				email,
 				lien,
 				username,
 			}),
 		};
 
-		fetch(/* '/newtheme' */, requestOptions)
+		fetch('/newcomment', requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
 				setCommentInsertedId(data.data.insertedId);
@@ -94,24 +101,26 @@ const Theme = () => {
 				)}
 			</ThemeSection>
 
+			<CommentThread />
+
 			<Form
 				onSubmit={(e) => {
 					handleSubmit(e);
 				}}
 			>
+				<textarea
+					placeholder='Que voulez-vous dire?'
+					value={comment}
+					onChange={(e) => {
+						handleChange(e);
+					}}
+				></textarea>
+
 				<ButtonWrapper>
 					<Button type='submit' disabled={disableButton}>
 						COMMENTER
 					</Button>
 				</ButtonWrapper>
-
-				<textarea
-					placeholder='Que voulez-vous dire?'
-					value={theme}
-					onChange={(e) => {
-						handleChange(e);
-					}}
-				></textarea>
 			</Form>
 		</>
 	);
@@ -151,7 +160,6 @@ const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-	border-radius: 15px;
 	padding: 1em;
 	width: 344px;
 	margin-top: 1em;

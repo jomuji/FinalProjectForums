@@ -1,7 +1,11 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Couche from '../assets/couche.png';
+import { Link } from 'react-router-dom';
+import Attribution from '../assets/attribution.png';
+import CreativeCommon from '../assets/common.png';
+import NonCommercial from '../assets/noCommercialUse.png';
 
 const Footer = () => {
 	const [email, setEmail] = useState('');
@@ -69,7 +73,40 @@ const Footer = () => {
 					<img src={Couche} />
 				</SecondSection>
 			</Wrapper>
-			<GreenSection></GreenSection>
+			<GreenSection>
+				<LicenseSection>
+					<LicenseLogo
+						href='https://creativecommons.org/licenses/by-nc/4.0/deed.fr'
+						target='_blank'
+					>
+						<img src={CreativeCommon} alt='cc' />
+						<img src={Attribution} alt='attribution' />
+						<img src={NonCommercial} alt='nc' />
+					</LicenseLogo>
+
+					<p>
+						License:
+						<a
+							href='https://creativecommons.org/licenses/by-nc/4.0/deed.fr'
+							target='_blank'
+						>
+							CC BY-NC 4.0
+						</a>
+					</p>
+
+					<p>
+						attribution:
+						<Link to='/programme'>
+							Réussir le démarrage d'une communauté
+						</Link>{' '}
+					</p>
+
+					<p>
+						par:
+						<Link to='/equipe'> l'équipe d'Ailleurs conseil</Link>
+					</p>
+				</LicenseSection>
+			</GreenSection>
 		</>
 	);
 };
@@ -197,4 +234,16 @@ const GreenSection = styled.div`
 	position: relative;
 	bottom: 0;
 	right: 0;
+`;
+
+const LicenseSection = styled.div`
+	img {
+		width: 1.8em;
+	}
+`;
+
+const LicenseLogo = styled.a`
+	display: flex;
+	flex-direction: row;
+	gap: 0.8em;
 `;

@@ -14,6 +14,7 @@ const options = {
 const updateThemeById = async (req, res) => {
 	// Request from body
 	const { _id } = req.params;
+	console.log(_id, 'ID');
 	// CREATE A NEW CLIENT
 	const client = new MongoClient(MONGO_URI, options);
 
@@ -29,7 +30,7 @@ const updateThemeById = async (req, res) => {
 			{ _id },
 			{
 				$set: {
-					theme: req.body,
+					theme: req.body.theme,
 				},
 			}
 		);
@@ -46,7 +47,9 @@ const updateThemeById = async (req, res) => {
 		}
 	} catch (err) {
 		console.log(err.stack);
-		res.status(500).json({ status: 500, data: req.body, message: err.message });
+		res
+			.status(500)
+			.json({ status: 500, data: req.body.theme, message: err.message });
 	} finally {
 		// close the connection to the database server
 		client.close();

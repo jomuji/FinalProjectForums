@@ -1,11 +1,11 @@
 import React from 'react';
-import 'draft-js/dist/Draft.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
+/* import 'draft-js/dist/Draft.css'; */
 /* import MyEditor from './Editor'; */
 
 const CreateTheme = () => {
@@ -115,7 +115,6 @@ const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-	border-radius: 15px;
 	padding: 1em;
 	width: 344px;
 	margin-top: 1em;

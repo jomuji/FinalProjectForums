@@ -77,7 +77,7 @@ express()
 
 	// comment
 	.post('/newcomment', postNewComment)
-	.get('/comments/:_Id', getCommentsByThemeId)
+	.get('/comments/:_id', getCommentsByThemeId)
 	// email list Launch
 	.post('/emailListLaunch', postEmailListLaunch)
 

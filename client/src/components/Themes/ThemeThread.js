@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { ThemeSection } from './ThemeSection';
 
 const ThemeThread = () => {
 	const indicatorSize = 80;
@@ -43,7 +44,6 @@ const ThemeThread = () => {
 				lien,
 				username,
 				email,
-				///ajouter les autres
 			}),
 		};
 
@@ -57,32 +57,25 @@ const ThemeThread = () => {
 			});
 	};
 
-	// fetch data getModulesById '/modules/:_id'
+	//onClick function to handle UPDATING a theme
+	const handleUpdateClick = (e, _id, updatedTheme) => {
+		e.preventDefault();
 
-	//onClick function to handle if a theme is updatefrom thread
-	/* 	const handleUpdateClick = (e) => {
-		e.preventDefault(); */
-
-	/* const _id; */
-
-	/* 	const requestOptions = {
+		const requestOptions = {
 			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				/* _id, */
-	//	}),
-	//};
+			body: JSON.stringify({ _id, theme: updatedTheme }),
+		};
 
-	/* 		fetch('/updatetheme/:_id', requestOptions)
+		fetch(`/updatetheme/${_id}`, requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				setReloadState(!reloadState);
 				/* setTheme(''); */
-	//	})
-	//.catch((error) => {
-	//	console.log(error);
-	//		}); */ */
-	//};
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 
 	const WrapperSection = () => {
 		if (isLoading) {
@@ -105,7 +98,7 @@ const ThemeThread = () => {
 			return (
 				<Wrapper>
 					{themesByModule.map((theme) => (
-						<ThemeSection>
+						<Section>
 							<Nav key={theme._id} to={`/forums/fil/${theme._id}`}>
 								<ThemePost>{theme.theme}</ThemePost>
 							</Nav>
@@ -113,7 +106,7 @@ const ThemeThread = () => {
 								<Bold>Par: </Bold>
 								{theme.username}
 							</UserName>
-						</ThemeSection>
+						</Section>
 					))}
 				</Wrapper>
 			);
@@ -121,7 +114,15 @@ const ThemeThread = () => {
 			return (
 				<Wrapper>
 					{themesByModule.map((theme) => (
-						<ThemeSection>
+						<ThemeSection
+							key={theme._id}
+							id={theme._id}
+							theme={theme.theme}
+							username={theme.username}
+							handleUpdateClick={handleUpdateClick}
+							handleDeleteClick={handleDeleteClick}
+						/>
+						/* 	<ThemeSection>
 							<Nav key={theme._id} to={`/forums/fil/${theme._id}`}>
 								<ThemePost>{theme.theme}</ThemePost>
 							</Nav>
@@ -132,7 +133,9 @@ const ThemeThread = () => {
 
 							{user.name === theme.username && (
 								<ButtonSection>
-									<UpdateButton /* onClick={handleUpdateClick} */>
+									<UpdateButton
+										onClick={(e) => handleUpdateClick(e, theme._id)}
+									>
 										METTRE À JOUR
 									</UpdateButton>
 									<DeleteButton
@@ -142,7 +145,7 @@ const ThemeThread = () => {
 									</DeleteButton>
 								</ButtonSection>
 							)}
-						</ThemeSection>
+						</ThemeSection> */
 					))}
 				</Wrapper>
 			);
@@ -175,7 +178,7 @@ export default ThemeThread;
 const Wrapper = styled.div`
 	max-width: 344px;
 `;
-const ThemeSection = styled.div`
+const Section = styled.div`
 	margin-bottom: 1.2em;
 `;
 

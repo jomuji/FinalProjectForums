@@ -11,7 +11,9 @@ const options = {
 };
 
 const getCommentsByThemeId = async (req, res) => {
+	console.log('Hello');
 	const { _id } = req.params;
+	console.log(_id, 'ID');
 
 	// findOneAndUpdate user info from MongoDB
 	const client = new MongoClient(MONGO_URI, options);
@@ -22,6 +24,7 @@ const getCommentsByThemeId = async (req, res) => {
 		console.log('connected!');
 
 		let findRes = await db.collection('themes').findOne({ _id });
+		console.log(findRes, 'FINDRES');
 
 		// map through theme collection looking for matching _ids
 		const result = await Promise.all(
