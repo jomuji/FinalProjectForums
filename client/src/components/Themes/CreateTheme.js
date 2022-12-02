@@ -79,7 +79,7 @@ const CreateTheme = () => {
 					}}
 				>
 					<textarea
-						placeholder='Créez un nouveau fil de discussion'
+						placeholder='Que voulez-vous dire?'
 						value={theme}
 						onChange={(e) => {
 							handleChange(e);
@@ -88,7 +88,7 @@ const CreateTheme = () => {
 
 					<ButtonWrapper>
 						<Button type='submit' disabled={disableButton}>
-							CRÉER
+							PUBLIER
 						</Button>
 					</ButtonWrapper>
 				</Form>

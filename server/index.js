@@ -26,12 +26,18 @@ const { postNewTheme } = require('./handlers/themes/postNewTheme');
 const {
 	getThemesByModulesLien,
 } = require('./handlers/themes/getThemesByModulesLien');
+const { updateThemeById } = require('./handlers/themes/updateThemeById');
+const { deleteThemeById } = require('./handlers/themes/deleteThemeById');
+const { getThemeById } = require('./handlers/themes/getThemeById');
+//handler COMMENT
+const { postNewComment } = require('./handlers/comments/postNewComment');
+const {
+	getCommentsByThemeId,
+} = require('./handlers/comments/getCommentsByThemeId');
 // hander EMAILLIST
 const {
 	postEmailListLaunch,
 } = require('./handlers/emailList/postEmailListLaunch');
-const { updateThemeById } = require('./handlers/themes/updateThemeById');
-const { deleteThemeById } = require('./handlers/themes/deleteThemeById');
 
 const port = 8000;
 
@@ -67,7 +73,11 @@ express()
 	.post('/newtheme', postNewTheme)
 	.delete('/deletethemeById/:_id', deleteThemeById)
 	.patch('/updatetheme/:_id', updateThemeById)
+	.get('/theme/:_id', getThemeById)
 
+	// comment
+	.post('/newcomment', postNewComment)
+	.get('/comments/:_Id', getCommentsByThemeId)
 	// email list Launch
 	.post('/emailListLaunch', postEmailListLaunch)
 
