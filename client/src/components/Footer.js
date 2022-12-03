@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Attribution from '../assets/attribution.png';
 import CreativeCommon from '../assets/common.png';
 import NonCommercial from '../assets/noCommercialUse.png';
+import { device } from '../components/MediaQueries';
 
 const Footer = () => {
 	const [email, setEmail] = useState('');
@@ -38,80 +39,93 @@ const Footer = () => {
 
 	return (
 		<>
-			<Wrapper>
-				<FirstSection>
-					<SectionDate>
-						<Date>Lancement en juin 2023</Date>
-						<Rejoignez>
-							Rejoignez la liste de diffusion pour vous tenir au courant du
-							lancement du programme:
-						</Rejoignez>
+			<WrapperBlue>
+				<Wrapper>
+					<FirstSection>
+						<SectionDate>
+							<Date>Lancement en juin 2023</Date>
+							<Rejoignez>
+								Rejoignez la liste de diffusion pour vous tenir au courant du
+								lancement du programme:
+							</Rejoignez>
 
-						<Reussir>Réussir le démarrage d'une communauté de pratique</Reussir>
-					</SectionDate>
+							<Reussir>
+								Réussir le démarrage d'une communauté de pratique
+							</Reussir>
+						</SectionDate>
 
-					<Form
-						onSubmit={(e) => {
-							handleSubmit(e);
-						}}
-					>
-						<input
-							type='email'
-							placeholder='Courriel'
-							value={email}
-							onChange={(e) => {
-								handleChange(e);
+						<Form
+							onSubmit={(e) => {
+								handleSubmit(e);
 							}}
-						/>
+						>
+							<input
+								type='email'
+								placeholder='Courriel'
+								value={email}
+								onChange={(e) => {
+									handleChange(e);
+								}}
+							/>
 
-						<ButtonWrapper>
-							<Button type='submit'>REJOIGNEZ</Button>
-						</ButtonWrapper>
-					</Form>
-				</FirstSection>
-				<SecondSection>
-					<img src={Couche} />
-				</SecondSection>
-			</Wrapper>
-			<GreenSection>
-				<LicenseSection>
-					<LicenseLogo
-						href='https://creativecommons.org/licenses/by-nc/4.0/deed.fr'
-						target='_blank'
-					>
-						<img src={CreativeCommon} alt='cc' />
-						<img src={Attribution} alt='attribution' />
-						<img src={NonCommercial} alt='nc' />
-					</LicenseLogo>
-
-					<p>
-						<Bold>license: </Bold>
-						<a
+							<ButtonWrapper>
+								<Button type='submit'>REJOIGNEZ</Button>
+							</ButtonWrapper>
+						</Form>
+					</FirstSection>
+					<SecondSection>
+						<img src={Couche} />
+					</SecondSection>
+				</Wrapper>
+			</WrapperBlue>
+			<GreenSectionWrapper>
+				<GreenSection>
+					<LicenseSection>
+						<LicenseLogo
 							href='https://creativecommons.org/licenses/by-nc/4.0/deed.fr'
 							target='_blank'
 						>
-							CC BY-NC 4.0
-						</a>
-					</p>
+							<img src={CreativeCommon} alt='cc' />
+							<img src={Attribution} alt='attribution' />
+							<img src={NonCommercial} alt='nc' />
+						</LicenseLogo>
 
-					<p>
-						<Bold>attribution: </Bold>
-						<Link to='/programme'>
-							Réussir le démarrage d'une communauté de pratique
-						</Link>{' '}
-					</p>
+						<p>
+							<Bold>license: </Bold>
+							<a
+								href='https://creativecommons.org/licenses/by-nc/4.0/deed.fr'
+								target='_blank'
+							>
+								CC BY-NC 4.0
+							</a>
+						</p>
 
-					<p>
-						<Bold>par: </Bold>
-						<Link to='/equipe'> l'équipe d'Ailleurs conseil</Link>
-					</p>
-				</LicenseSection>
-			</GreenSection>
+						<p>
+							<Bold>attribution: </Bold>
+							<Link to='/programme'>
+								Réussir le démarrage d'une communauté de pratique
+							</Link>{' '}
+						</p>
+
+						<p>
+							<Bold>par: </Bold>
+							<Link to='/equipe'> l'équipe d'Ailleurs conseil</Link>
+						</p>
+					</LicenseSection>
+				</GreenSection>
+			</GreenSectionWrapper>
 		</>
 	);
 };
 
 export default Footer;
+
+const WrapperBlue = styled.div`
+	position: relative;
+	height: 420px;
+	background-color: #4083bb;
+	z-index: -1000;
+`;
 
 const Wrapper = styled.section`
 	position: relative;
@@ -121,6 +135,11 @@ const Wrapper = styled.section`
 	flex-direction: column;
 	flex-wrap: wrap;
 
+	@media ${device.laptop} {
+		max-width: 1024px;
+		margin-left: 175px;
+	}
+
 	img {
 		position: absolute;
 		z-index: 0;
@@ -129,10 +148,14 @@ const Wrapper = styled.section`
 	}
 `;
 
-const FirstSection = styled.section`
-	max-width: 344px;
+const FirstSection = styled.section``;
+const SecondSection = styled.section`
+	@media ${device.laptop} {
+		img {
+			width: 500px;
+		}
+	}
 `;
-const SecondSection = styled.section``;
 
 const SectionDate = styled.section`
 	color: #fffaea;
@@ -158,6 +181,11 @@ const Rejoignez = styled.div`
 	position: absolute;
 	top: 105.6px;
 	left: 16px;
+
+	@media ${device.laptop} {
+		top: 125.6px;
+		max-width: 400px;
+	}
 `;
 
 const Reussir = styled.div`
@@ -170,6 +198,10 @@ const Reussir = styled.div`
 	top: 177.6px;
 	left: 16px;
 	color: #fada80;
+
+	@media ${device.laptop} {
+		top: 217.6px;
+	}
 `;
 
 const Form = styled.form`
@@ -191,6 +223,14 @@ const Form = styled.form`
 		transition: 0.5s;
 		&:focus {
 			border: 3px solid var(--red);
+		}
+	}
+
+	@media ${device.laptop} {
+		padding-top: 217.6px;
+
+		input {
+			width: 250px;
 		}
 	}
 `;
@@ -224,6 +264,12 @@ const ButtonWrapper = styled.div`
 	gap: 30px;
 `;
 
+const GreenSectionWrapper = styled.div`
+	background-color: #53b675;
+	@media ${device.laptop} {
+	}
+`;
+
 const GreenSection = styled.div`
 	background-color: #53b675;
 	padding-left: 16px;
@@ -234,6 +280,10 @@ const GreenSection = styled.div`
 	position: relative;
 	bottom: 0;
 	right: 0;
+	@media ${device.laptop} {
+		max-width: 1024px;
+		margin-left: 175px;
+	}
 `;
 
 const LicenseSection = styled.div`

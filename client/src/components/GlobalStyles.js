@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { device } from './MediaQueries';
 
 export default createGlobalStyle`
 
@@ -56,11 +57,43 @@ export default createGlobalStyle`
       font-family: var(--font);
       background-color: #fffaea;
 
+      @media ${device.mobileS} {
+		font-size: 16px;
+	}
+
+	@media ${device.mobileM} {
+		font-size: 16px;
+	}
+
+	@media ${device.mobileL} {
+		font-size: 16px;
+	}
+
+	// 20px de marge de chaque coté
+	@media ${device.tablet} {
+    font-size: 18px;
+	}
+
+	// 40px de marge de chaque coté
+	@media ${device.laptop} {
+		font-size: 21px;
+	}
+
+	// 60px de marge de chaque côté
+	@media ${device.laptopL} {
+		font-size: 21px;
+	}
+
+	// 120px de marge de chaque côté
+	@media ${device.desktop} {
+    font-size: 21px;
+	}}
+
 /* @media (min-width: 1366px) {
 font-size: 18px;
 }; */
     /*   color: var(--darkgrey); */
-  }
+  
   ol, ul {
       list-style: none;
   }

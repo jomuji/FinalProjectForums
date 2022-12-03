@@ -1,21 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Footer from '../../components/Footer';
+import { device } from '../../components/MediaQueries';
 
 const Home = () => {
-	const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
-	const isDesktopOrLaptop = useMediaQuery({
-		query: '(min-width: 1224px)',
-	});
 	return (
 		<>
 			<Wrapper>
-				<div>
-					<h1>Device Test!</h1>
-					{isDesktopOrLaptop && <p>You are a desktop or laptop</p>}
-					{isTabletOrMobile && <p>You are a tablet or mobile phone</p>}
-				</div>
-
 				<Titre>Réussir le démarrage d'une communauté de pratique</Titre>
 
 				<RightSection>
@@ -50,17 +41,54 @@ const Wrapper = styled.section`
 	align-items: flex-start;
 	margin-top: 16em;
 	margin-bottom: 57.6px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 
-  @media (min-width: 1366px) {
+	@media ${device.mobileS} {
+		max-width: 320px;
+	}
 
-};
+	@media ${device.mobileM} {
+		max-width: 375px;
+	}
 
+	@media ${device.mobileL} {
+		max-width: 425px;
+	}
+
+	// 20px de marge de chaque coté
+	@media ${device.tablet} {
+		max-width: 728px;
+	}
+
+	// 40px de marge de chaque coté
+	@media ${device.laptop} {
+		max-width: 1024px;
+		margin-top: 8em;
+	}
+
+	// 60px de marge de chaque côté
+	@media ${device.laptopL} {
+		max-width: 13204px;
+	}
+
+	// 120px de marge de chaque côté
+	@media ${device.desktop} {
+		max-width: 2320px;
+	} ;
 `;
 
-const RightSection = styled.div``;
+const RightSection = styled.div`
+	@media ${device.laptop} {
+		width: 50%;
+	}
+`;
 
 const Titre = styled.h1`
-	width: 300px;
+	@media ${device.laptop} {
+		width: 40%;
+	}
 `;
 
 const Introduction = styled.p`
@@ -69,7 +97,6 @@ const Introduction = styled.p`
 	gap: 1em;
 	color: var(--lightgrey);
 	margin-bottom: 1em;
-	width: 343px;
 `;
 
 const Bold = styled.span`
@@ -88,14 +115,3 @@ const Button = styled.button`
 		background-color: var(--green);
 	}
 `;
-
-@media (min-width: 1024px) {
-
-
-};
-
-
-@media (min-width: 1366px) {
-
-};
-
