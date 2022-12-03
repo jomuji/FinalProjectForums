@@ -21,7 +21,6 @@ const CommentThread = () => {
 			.then(
 				// When the data is received, update setModuleById
 				(data) => {
-					console.log(data, 'data comments by id');
 					setCommentsById(data.data);
 				}
 			)
@@ -32,11 +31,14 @@ const CommentThread = () => {
 	}, [_id, deletedThemeId]);
 
 	//onClick function to handle if a comment is removed from thread
-	const handleDeleteClick = (e, _id, theme) => {
+	const handleDeleteClick = (e, theme, _id) => {
 		e.preventDefault();
 
 		const email = user.email;
 		const username = user.name;
+
+		console.log(theme, 'THEME IN HANDLE');
+		console.log(_id, 'ID IN HANDLE');
 
 		const requestOptions = {
 			method: 'DELETE',
@@ -129,6 +131,8 @@ const CommentThread = () => {
 					))} */}
 
 					<>
+						{console.log(commentsById, 'commentsById')}
+
 						{commentsById.map((comment) => (
 							<Section>
 								<Nav to={`/forums/fil/${comment.id}`}>
@@ -144,7 +148,7 @@ const CommentThread = () => {
 									<ButtonSection>
 										<DeleteButton
 											onClick={(e) =>
-												handleDeleteClick(e, comment.id, comment.theme)
+												handleDeleteClick(e, comment.theme, comment._id)
 											}
 										>
 											EFFACER
@@ -189,16 +193,20 @@ const Wrapper = styled.div`
 `;
 const Section = styled.div`
 	margin-bottom: 1.2em;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	padding: 1em;
+	width: 344px;
+	margin-top: 1em;
+	margin-left: 1em;
 `;
 
 const Nav = styled(NavLink)`
 	color: var(--red);
 `;
 
-const ThemePost = styled.a`
+const ThemePost = styled.p`
 	font-weight: 700;
-	font-size: 1.2em;
-	text-decoration: underline;
+	font-size: 1em;
 `;
 
 const UserName = styled.p`

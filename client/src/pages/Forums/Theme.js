@@ -30,12 +30,12 @@ const Theme = () => {
 		// DEPENDENCY: TRIGGERED WHEN _id PARAMS CHANGES
 	}, [_id, commentInsertedId]);
 
-	console.log(themeById, 'THEMEBYID');
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const email = user.email;
+
+		console.log(email, 'EMAIL');
 		const username = user.name;
 		const lien = themeById[0].lien;
 		const theme = themeById[0].theme;
@@ -165,6 +165,7 @@ const Form = styled.form`
 	padding: 1em;
 	width: 344px;
 	margin-top: 1em;
+	margin-left: 1em;
 	textarea {
 		margin-bottom: 1em;
 		height: 100px;
