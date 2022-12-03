@@ -55,6 +55,10 @@ export default createGlobalStyle`
       margin: 0px;
       font-family: var(--font);
       background-color: #fffaea;
+
+/* @media (min-width: 1366px) {
+font-size: 18px;
+}; */
     /*   color: var(--darkgrey); */
   }
   ol, ul {
