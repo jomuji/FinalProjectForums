@@ -236,7 +236,7 @@ const NavWrapper = styled.div`
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	gap: 2.7em;
+	gap: 5.2em;
 	position: fixed;
 	z-index: 2000;
 	top: 0;

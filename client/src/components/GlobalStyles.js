@@ -76,7 +76,7 @@ export default createGlobalStyle`
 
 	// 40px de marge de chaque coté
 	@media ${device.laptop} {
-		font-size: 21px;
+		font-size: 19px;
 	}
 
 	// 60px de marge de chaque côté

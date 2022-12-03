@@ -65,7 +65,9 @@ const Wrapper = styled.section`
 	// 40px de marge de chaque coté
 	@media ${device.laptop} {
 		max-width: 1024px;
-		margin-top: 8em;
+		margin-top: 10em;
+
+		margin-bottom: 5em;
 	}
 
 	// 60px de marge de chaque côté
@@ -87,7 +89,9 @@ const RightSection = styled.div`
 
 const Titre = styled.h1`
 	@media ${device.laptop} {
-		width: 40%;
+		padding-right: 5px;
+		font-size: 1.8em;
+		width: 290px;
 	}
 `;
 
