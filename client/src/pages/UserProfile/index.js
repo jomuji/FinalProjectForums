@@ -8,15 +8,30 @@ import { NavLink } from 'react-router-dom';
 
 const UserProfile = () => {
 	const indicatorSize = 80;
-	const { user, isAuthenticated, isLoading } = useAuth0();
+	const { user, isAuthenticated } = useAuth0();
 	const [userThemes, setUserThemes] = useState(null);
+	const [userComments, setUserComments] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 	const email = user.email;
 
 	useEffect(() => {
 		fetch(`/userThemes/${email}`)
 			.then((res) => res.json())
 			.then((data) => {
+				setIsLoading(false);
 				setUserThemes(data.data);
+			})
+			.catch((err) => {
+				console.log('err', err);
+			});
+	}, []);
+
+	useEffect(() => {
+		fetch(`/userComments/${email}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setIsLoading(false);
+				setUserComments(data.data);
 			})
 			.catch((err) => {
 				console.log('err', err);
@@ -26,7 +41,6 @@ const UserProfile = () => {
 	if (isLoading) {
 		return <div>Loading ...</div>;
 	}
-
 	return (
 		isAuthenticated && (
 			<Wrapper>
@@ -75,6 +89,36 @@ const UserProfile = () => {
 
 				<CommentSection>
 					<Titre>MES COMMENTAIRES</Titre>
+					{!userComments ? (
+						<CircularProgress
+							size={indicatorSize}
+							sx={{
+								position: 'absolute',
+								top: '50%',
+								left: '50%',
+								marginTop: `${-indicatorSize / 2}px`,
+								marginLeft: `${-indicatorSize / 2}px`,
+								color: '#FADA80',
+							}}
+						/>
+					) : (
+						<WrapperComment>
+							{userComments.map((comment) => (
+								<SectionComm>
+									<NavComm
+										key={comment.themeId}
+										to={`/forums/fil/${comment.themeId}`}
+									>
+										<CommentPost>{comment.comment}</CommentPost>
+									</NavComm>
+									<UserNameComm>
+										<Bold>Par:</Bold>
+										{comment.username}
+									</UserNameComm>
+								</SectionComm>
+							))}
+						</WrapperComment>
+					)}
 				</CommentSection>
 			</Wrapper>
 		)
@@ -124,10 +168,9 @@ const Nav = styled(NavLink)`
 	color: var(--red);
 `;
 
-const ThemePost = styled.a`
+const CommentPost = styled.a`
 	font-weight: 700;
-	font-size: 1.2em;
-	text-decoration: underline;
+	font-size: 1em;
 `;
 
 const Bold = styled.span`
@@ -135,6 +178,31 @@ const Bold = styled.span`
 `;
 
 const UserName = styled.p`
+	margin-top: 0.8em;
+	text-align: right;
+`;
+
+const WrapperComment = styled.div`
+	max-width: 344px;
+`;
+const SectionComm = styled.div`
+	margin-bottom: 1.2em;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	padding: 1em;
+	width: 344px;
+	margin-top: 1em;
+`;
+
+const NavComm = styled(NavLink)`
+	color: var(--red);
+`;
+
+const ThemePost = styled.a`
+	font-weight: 700;
+	font-size: 1.2em;
+`;
+
+const UserNameComm = styled.p`
 	margin-top: 0.8em;
 	text-align: right;
 `;

@@ -16,6 +16,7 @@ const CreateTheme = () => {
 	const [theme, setTheme] = useState('');
 	const [disableButton, setDisableButton] = useState(false);
 	const [themeInsertedId, setThemeInsertedId] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {}, [disableButton]);
 
@@ -23,12 +24,17 @@ const CreateTheme = () => {
 		fetch(`/themesbymodules/${lien}`)
 			.then((res) => res.json())
 			.then((data) => {
+				setIsLoading(false);
 				setThemesbyId(data.data);
 			})
 			.catch((err) => {
 				console.log('err', err);
 			});
-	}, [lien, themeInsertedId]);
+	}, [themeInsertedId, lien]);
+
+	if (isLoading) {
+		return <div>Loading..</div>;
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -50,8 +56,8 @@ const CreateTheme = () => {
 		fetch('/newtheme', requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				setThemeInsertedId(data.data.insertedId);
 				setTheme('');
+				setThemeInsertedId(data.data.insertedId);
 			})
 			.catch((error) => {
 				console.log(error);

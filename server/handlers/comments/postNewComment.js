@@ -13,7 +13,7 @@ const options = {
 
 const postNewComment = async (req, res) => {
 	// Request newTheme from body
-	const { _id, email, lien, username, comment, theme } = req.body;
+	const { _id, email, lien, username, comment, theme, themeId } = req.body;
 	const generatedId = uuidv4();
 
 	// CALL client  from MongoDB
@@ -27,7 +27,7 @@ const postNewComment = async (req, res) => {
 		// INSERT NEW THEME INTO THEMES COLLECTION
 		const result = await db
 			.collection('comments')
-			.insertOne({ _id: generatedId, comment, username, lien, theme });
+			.insertOne({ _id: generatedId, comment, username, lien, theme, themeId });
 
 		/* 	return res.status(200).json({ data: result }); */
 

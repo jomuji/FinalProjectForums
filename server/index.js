@@ -10,6 +10,7 @@ const {
 } = require('./handlers/users/getOrCreateUserByEmail');
 
 const { getThemesByUser } = require('./handlers/users/getThemesByUser');
+const { getCommentsByUser } = require('./handlers/users/getCommentsByUser');
 
 // handlers MODULES
 const { getAllModules } = require('./handlers/modules/getAllModules');
@@ -62,6 +63,7 @@ express()
 	.patch('/user/:email', updateUserByEmail)
 	.post('/user/:email', getOrCreateUserByEmail)
 	.get('/userThemes/:email', getThemesByUser)
+	.get('/userComments/:email', getCommentsByUser)
 
 	// modules endpoints
 	.get('/modules', getAllModules)
