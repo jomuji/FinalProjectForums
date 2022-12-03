@@ -3,9 +3,19 @@ import styled from 'styled-components';
 import Footer from '../../components/Footer';
 
 const Home = () => {
+	const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+	const isDesktopOrLaptop = useMediaQuery({
+		query: '(min-width: 1224px)',
+	});
 	return (
 		<>
 			<Wrapper>
+				<div>
+					<h1>Device Test!</h1>
+					{isDesktopOrLaptop && <p>You are a desktop or laptop</p>}
+					{isTabletOrMobile && <p>You are a tablet or mobile phone</p>}
+				</div>
+
 				<Titre>Réussir le démarrage d'une communauté de pratique</Titre>
 
 				<RightSection>
@@ -40,6 +50,11 @@ const Wrapper = styled.section`
 	align-items: flex-start;
 	margin-top: 16em;
 	margin-bottom: 57.6px;
+
+  @media (min-width: 1366px) {
+
+};
+
 `;
 
 const RightSection = styled.div``;
@@ -73,3 +88,14 @@ const Button = styled.button`
 		background-color: var(--green);
 	}
 `;
+
+@media (min-width: 1024px) {
+
+
+};
+
+
+@media (min-width: 1366px) {
+
+};
+
