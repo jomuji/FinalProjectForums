@@ -215,7 +215,7 @@ const Form = styled.form`
 	position: abolute;
 
 	input {
-		width: 150px;
+		width: 250px;
 		z-index: 1000;
 		border: none;
 		outline: none;
@@ -228,11 +228,6 @@ const Form = styled.form`
 
 	@media ${device.laptop} {
 		padding-top: 217.6px;
-
-		input {
-			width: 250px;
-		}
-	}
 `;
 
 const Button = styled.button`
