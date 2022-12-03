@@ -79,7 +79,6 @@ const ThemeThread = () => {
 
 	const WrapperSection = () => {
 		if (isLoading) {
-			console.log(isLoading, 'IS LOADING');
 			return (
 				<CircularProgress
 					size={indicatorSize}
@@ -116,36 +115,13 @@ const ThemeThread = () => {
 					{themesByModule.map((theme) => (
 						<ThemeSection
 							key={theme._id}
+							lien={theme.lien}
 							id={theme._id}
 							theme={theme.theme}
 							username={theme.username}
 							handleUpdateClick={handleUpdateClick}
 							handleDeleteClick={handleDeleteClick}
 						/>
-						/* 	<ThemeSection>
-							<Nav key={theme._id} to={`/forums/fil/${theme._id}`}>
-								<ThemePost>{theme.theme}</ThemePost>
-							</Nav>
-							<UserName>
-								<Bold>Par: </Bold>
-								{theme.username}
-							</UserName>
-
-							{user.name === theme.username && (
-								<ButtonSection>
-									<UpdateButton
-										onClick={(e) => handleUpdateClick(e, theme._id)}
-									>
-										METTRE À JOUR
-									</UpdateButton>
-									<DeleteButton
-										onClick={(e) => handleDeleteClick(e, theme._id)}
-									>
-										EFFACER
-									</DeleteButton>
-								</ButtonSection>
-							)}
-						</ThemeSection> */
 					))}
 				</Wrapper>
 			);
@@ -199,24 +175,4 @@ const Bold = styled.span`
 const UserName = styled.p`
 	margin-top: 0.8em;
 	text-align: right;
-`;
-
-const ButtonSection = styled.section`
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	font-size: 0.8em;
-	gap: 1em;
-	margin-top: 0.8em;
-	margin-bottom: 0.8em;
-	padding-bottom: 0.8em;
-	border-bottom: 0.2em dotted #fada80;
-`;
-
-const UpdateButton = styled.a`
-	text-decoration: underline;
-`;
-
-const DeleteButton = styled.button`
-	text-decoration: underline;
 `;

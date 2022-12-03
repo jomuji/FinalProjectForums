@@ -37,7 +37,8 @@ const Theme = () => {
 
 		const email = user.email;
 		const username = user.name;
-		const lien = themeById[0].theme;
+		const lien = themeById[0].lien;
+		const theme = themeById[0].theme;
 
 		const requestOptions = {
 			method: 'POST',
@@ -48,6 +49,7 @@ const Theme = () => {
 				email,
 				lien,
 				username,
+				theme,
 			}),
 		};
 

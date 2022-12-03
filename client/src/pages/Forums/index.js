@@ -39,9 +39,6 @@ const Forums = () => {
 					</TitreSection>
 					<ForumsSection>
 						{modules.map((module) => {
-							{
-								console.log(module, 'MODULE');
-							}
 							if (!module) {
 								<CircularProgress
 									size={indicatorSize}

@@ -34,6 +34,8 @@ const { postNewComment } = require('./handlers/comments/postNewComment');
 const {
 	getCommentsByThemeId,
 } = require('./handlers/comments/getCommentsByThemeId');
+
+const { deleteCommentById } = require('./handlers/comments/deleteCommentById');
 // hander EMAILLIST
 const {
 	postEmailListLaunch,
@@ -78,6 +80,7 @@ express()
 	// comment
 	.post('/newcomment', postNewComment)
 	.get('/comments/:_id', getCommentsByThemeId)
+	.delete('/deleteCommentById/:_id', deleteCommentById)
 	// email list Launch
 	.post('/emailListLaunch', postEmailListLaunch)
 
