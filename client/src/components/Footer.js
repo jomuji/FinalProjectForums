@@ -10,7 +10,20 @@ import { device } from '../components/MediaQueries';
 
 const Footer = () => {
 	const [email, setEmail] = useState('');
+	const [message, setMessage] = useState('');
 
+	const emailValidation = () => {
+		const regEx = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+		if (regEx.test(email)) {
+			setMessage('Merci =)');
+		} else if (!regEx.test(email)) {
+			setMessage('Les courriels ont le format suivant: usager@domaine.com');
+		} else if (email != '') {
+			setMessage('Les courriels ont le format suivant: usager@domaine.com');
+		} else {
+			setMessage('');
+		}
+	};
 	// reload state
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -39,6 +52,33 @@ const Footer = () => {
 
 	return (
 		<>
+			{/* 			<FormEmail>
+				<EmailListForm />
+			</FormEmail> */}
+			<FormWrapper>
+				<Form
+					onSubmit={(e) => {
+						handleSubmit(e);
+					}}
+				>
+					<input
+						type='email'
+						placeholder='Courriel'
+						value={email}
+						onChange={(e) => {
+							handleChange(e);
+						}}
+					/>
+
+					<ButtonWrapper>
+						<Button type='submit' onClick={emailValidation}>
+							REJOIGNEZ
+						</Button>
+					</ButtonWrapper>
+					<Message>{message}</Message>
+				</Form>
+			</FormWrapper>
+
 			<WrapperBlue>
 				<Wrapper>
 					<FirstSection>
@@ -46,32 +86,13 @@ const Footer = () => {
 							<Date>Lancement en juin 2023</Date>
 							<Rejoignez>
 								Rejoignez la liste de diffusion pour vous tenir au courant du
-								lancement du programme:
+								programme:
 							</Rejoignez>
 
 							<Reussir>
 								Réussir le démarrage d'une communauté de pratique
 							</Reussir>
 						</SectionDate>
-
-						<Form
-							onSubmit={(e) => {
-								handleSubmit(e);
-							}}
-						>
-							<input
-								type='email'
-								placeholder='Courriel'
-								value={email}
-								onChange={(e) => {
-									handleChange(e);
-								}}
-							/>
-
-							<ButtonWrapper>
-								<Button type='submit'>REJOIGNEZ</Button>
-							</ButtonWrapper>
-						</Form>
 					</FirstSection>
 					<SecondSection>
 						<img src={Couche} />
@@ -120,6 +141,12 @@ const Footer = () => {
 
 export default Footer;
 
+/* const FormEmail = styled.div`
+	position: absolute;
+	bottom: 0;
+	left: 200px;
+	z-index: 4000;
+`; */
 const WrapperBlue = styled.div`
 	position: relative;
 	height: 420px;
@@ -203,7 +230,18 @@ const Reussir = styled.div`
 	color: #fada80;
 
 	@media ${device.laptop} {
-		top: 217.6px;
+		top: 197.6px;
+	}
+`;
+
+const FormWrapper = styled.div`
+	position: relative;
+	z-index: 3000;
+	bottom: 0;
+	@media ${device.laptop} {
+		z-index: 3000;
+		bottom: -343px;
+		left: 193px;
 	}
 `;
 
@@ -211,11 +249,6 @@ const Form = styled.form`
 	display: flex;
 	flex-direction: row;
 	gap: 1em;
-	padding-top: 166px;
-	padding-left: 16px;
-	padding-right: 16px;
-	padding-bottom: 2em;
-	position: abolute;
 
 	input {
 		width: 250px;
@@ -223,14 +256,15 @@ const Form = styled.form`
 		border: none;
 		outline: none;
 		transition: 0.5s;
+		padding-left: 1em;
+		font-size: 1em;
 		&:focus {
 			border: 3px solid var(--red);
 		}
 	}
 
 	@media ${device.laptop} {
-		padding-top: 217.6px;
-		margin-bottom: 3em;
+		z-index: 3000;
 	}
 `;
 
@@ -261,6 +295,15 @@ const ButtonWrapper = styled.div`
 	justify-content: flex-end;
 	align-items: center;
 	gap: 30px;
+`;
+
+const Message = styled.div`
+	position: absolute;
+	width: 400px;
+	left: 0px;
+	bottom: -70px;
+	color: #fffaea;
+	font-weight: 700;
 `;
 
 const GreenSectionWrapper = styled.div`

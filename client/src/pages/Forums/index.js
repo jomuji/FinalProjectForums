@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { device } from '../../components/MediaQueries';
+import Footer from '../../components/Footer';
 
 // components
 import LoginButton from '../../components/LoginButton';
@@ -90,6 +91,7 @@ const Forums = () => {
 					</ForumsSection>
 				</Wrapper>
 			)}
+			<Footer />
 		</>
 	);
 };
@@ -105,7 +107,6 @@ const Wrapper = styled.section`
 	@media ${device.laptop} {
 		max-width: 1100px;
 		margin-top: 10em;
-		margin-bottom: 5em;
 		margin-left: 180px;
 	}
 `;
@@ -128,7 +129,7 @@ const ForumsSection = styled.section`
 
 	@media ${device.laptop} {
 		max-width: 700px;
-		margin-bottom: 5em;
+		margin-bottom: 3em;
 	}
 `;
 const ModuleSection = styled.button`
