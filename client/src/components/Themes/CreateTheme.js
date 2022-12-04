@@ -49,7 +49,7 @@ const CreateTheme = () => {
 				.catch((err) => console.error(err));
 		};
 		loadThemesByModules();
-	}, [themeInsertedId, lien]);
+	}, [themeInsertedId, themesByID, lien]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

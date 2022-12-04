@@ -45,10 +45,10 @@ const App = () => {
 				<Route path='/' element={<Home />} />
 				<Route path='/user' element={<UserProfile />} />
 				<Route path='/programme' element={<Programme />} />
-				<Route path='/programme/:modules' element={<ProgrammeModule />} />
+				<Route path='/programme/:lien' element={<ProgrammeModule />} />
 				<Route path='/forums' element={<Forums />} />
 				<Route path='/forums/:lien' element={<ForumsModule />} />
-				<Route path='/forums/fil/:_id' element={<Theme />} />
+				<Route path='/forums/:_id' element={<Theme />} />
 				<Route path='/equipe' element={<Equipe />} />
 			</Routes>
 		</BrowserRouter>

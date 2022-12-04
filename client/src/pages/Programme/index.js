@@ -46,7 +46,7 @@ const Programme = () => {
 					<Apropos>
 						<Introduction>
 							<p>
-								<Bold>À PROPOS DU PROGRAMME</Bold>
+								<BoldTitre>À PROPOS DU PROGRAMME</BoldTitre>
 							</p>
 							<p>
 								Il s'adresse aux<Bold> facilitatrices </Bold>et
@@ -166,6 +166,9 @@ const TitreSection = styled.section`
 
 const TitrePage = styled.h1`
 	font-weight: 700;
+	@media ${device.laptop} {
+		margin-bottom: 0.8em;
+	}
 `;
 
 const Apropos = styled.section`
@@ -192,7 +195,14 @@ const Bold = styled.span`
 	font-weight: 700;
 `;
 
-const Table = styled.section`
+const BoldTitre = styled.span`
+	font-weight: 700;
+	@media ${device.laptop} {
+		font-size: 1.3em;
+	}
+`;
+
+const Table = styled.table`
 	color: #4083bb;
 	font-weight: 700;
 	width: 450px;
@@ -235,7 +245,7 @@ const FirstSection = styled.div`
 const Id = styled.div`
 	font-size: 6em;
 	@media ${device.laptop} {
-		font-size: 9em;
+		font-size: 11em;
 	}
 `;
 const Forum = styled.div`
@@ -264,7 +274,7 @@ const Question = styled.ul`
 	li {
 	}
 	@media ${device.laptop} {
-		font-size: 1.3em;
+		font-size: 1.5em;
 	}
 `;
 
@@ -272,11 +282,16 @@ const Objectif = styled.div`
 	font-size: 1em;
 	color: var(--lightgrey);
 	@media ${device.laptop} {
-		font-size: 1.3em;
+		font-size: 1.5em;
+		font-weight: 700;
 	}
 `;
 
 const Titre = styled.div`
 	font-weight: 700;
 	font-size: 1.3em;
+
+	@media ${device.laptop} {
+		font-size: 2em;
+	}
 `;

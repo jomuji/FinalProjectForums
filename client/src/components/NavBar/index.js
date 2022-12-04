@@ -50,12 +50,9 @@ const NavBar = () => {
 
 			// if user is authenticated, it displays his name and links to signoff
 		} else if (isAuthenticated) {
-			let name = user.given_name;
-			name = name.toUpperCase();
 			return (
 				<User onClick={() => navigate('/user')}>
 					<img src={user.picture} alt='PhotoUsager' />
-					{/* <Connexion>{name}</Connexion> */}
 				</User>
 			);
 
@@ -160,7 +157,6 @@ const NavBar = () => {
 											}}
 										/>;
 									} else {
-										title = title.toUpperCase();
 									}
 									return (
 										<NavLink

@@ -10,7 +10,7 @@ import { device } from '../../components/MediaQueries';
 
 const ThemeThread = () => {
 	const indicatorSize = 80;
-	const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+	const { user, isAuthenticated, isLoading } = useAuth0();
 	const { lien } = useParams();
 	const [themesByModule, setThemesByModule] = useState(null);
 	const [deletedThemeId, setDeletedThemeId] = useState(null);

@@ -18,7 +18,7 @@ const Footer = () => {
 			setMessage('Merci =)');
 		} else if (!regEx.test(email)) {
 			setMessage('Les courriels ont le format suivant: usager@domaine.com');
-		} else if (email != '') {
+		} else if (email !== '') {
 			setMessage('Les courriels ont le format suivant: usager@domaine.com');
 		} else {
 			setMessage('');
@@ -95,7 +95,7 @@ const Footer = () => {
 						</SectionDate>
 					</FirstSection>
 					<SecondSection>
-						<img src={Couche} />
+						<img src={Couche} alt='' />
 					</SecondSection>
 				</Wrapper>
 			</WrapperBlue>
@@ -116,6 +116,7 @@ const Footer = () => {
 							<a
 								href='https://creativecommons.org/licenses/by-nc/4.0/deed.fr'
 								target='_blank'
+								rel='noreferrer'
 							>
 								CC BY-NC 4.0
 							</a>
@@ -125,7 +126,7 @@ const Footer = () => {
 							<Bold>attribution: </Bold>
 							<Link to='/programme'>
 								Réussir le démarrage d'une communauté de pratique
-							</Link>{' '}
+							</Link>
 						</p>
 
 						<p>

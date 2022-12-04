@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Footer from '../../components/Footer';
 import { device } from '../../components/MediaQueries';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 	return (
@@ -22,7 +23,8 @@ const Home = () => {
 							et<Bold> pérenne </Bold>
 						</p>
 					</Introduction>
-					<Button>APERÇU DU PROGRAMME</Button>
+
+					<Button to='/programme'>APERÇU DU PROGRAMME</Button>
 				</RightSection>
 			</Wrapper>
 			<Footer />
@@ -100,13 +102,17 @@ const Introduction = styled.p`
 	gap: 1em;
 	color: var(--lightgrey);
 	margin-bottom: 1em;
+	@media ${device.laptop} {
+		width: 575px;
+		margin-bottom: 2em;
+	}
 `;
 
 const Bold = styled.span`
 	font-weight: 700;
 `;
 
-const Button = styled.button`
+const Button = styled(Link)`
 	border: none;
 	background-color: var(--red);
 	color: #fffaea;
@@ -116,5 +122,6 @@ const Button = styled.button`
 	font-size: 0.8em;
 	&:hover {
 		background-color: var(--green);
+		color: #fffaea;
 	}
 `;
