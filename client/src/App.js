@@ -35,7 +35,7 @@ const App = () => {
 					console.log(error);
 				});
 		}
-	}, [isAuthenticated]);
+	}, [isAuthenticated, user]);
 
 	return (
 		<BrowserRouter>
