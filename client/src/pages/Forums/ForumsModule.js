@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import CreateTheme from '../../components/Themes/CreateTheme';
 import { CircularProgress } from '@mui/material';
 import ThemeThread from '../../components/Themes/ThemeThread';
+import { device } from '../../components/MediaQueries';
 
 const ForumsModule = () => {
 	const indicatorSize = 80;
@@ -64,6 +65,11 @@ const Wrapper = styled.div`
 	margin-left: 1em;
 	margin-right: 1em;
 	margin-bottom: 1em;
+
+	@media ${device.laptop} {
+		margin-top: 9em;
+		margin-left: 200px;
+	}
 `;
 
 const TitrePage = styled.h1`
@@ -74,6 +80,9 @@ const TitreFils = styled.h1`
 	font-weight: 700;
 	margin-top: 1em;
 	margin-bottom: 1em;
+	@media ${device.laptop} {
+		margin-top: 1.5em;
+	}
 `;
 
 const Titre = styled.span`

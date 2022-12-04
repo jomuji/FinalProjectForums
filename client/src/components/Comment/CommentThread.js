@@ -1,12 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { CommentSection } from './CommentSection';
 //import { ThemeSection } from './ThemeSection';
+import { device } from '../../components/MediaQueries';
 
 const CommentThread = () => {
 	const indicatorSize = 80;
@@ -190,6 +192,9 @@ export default CommentThread;
 
 const Wrapper = styled.div`
 	max-width: 344px;
+	@media ${device.laptop} {
+		margin-left: 500px;
+	}
 `;
 const Section = styled.div`
 	margin-bottom: 1.2em;
@@ -198,6 +203,9 @@ const Section = styled.div`
 	width: 344px;
 	margin-top: 1em;
 	margin-left: 1em;
+	@media ${device.laptop} {
+		width: 580px;
+	}
 `;
 
 const Nav = styled(NavLink)`

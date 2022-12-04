@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { device } from '../../components/MediaQueries';
 
 // components
 import LoginButton from '../../components/LoginButton';
@@ -100,6 +101,13 @@ const Wrapper = styled.section`
 	padding-left: 1em;
 	padding-right: 1em;
 	padding-bottom: 1em;
+
+	@media ${device.laptop} {
+		max-width: 1100px;
+		margin-top: 10em;
+		margin-bottom: 5em;
+		margin-left: 180px;
+	}
 `;
 const TitreSection = styled.section`
 	display: flex;
@@ -117,6 +125,11 @@ const ForumsSection = styled.section`
 	gap: 1em;
 	margin-top: 1.5em;
 	margin-bottom: 1em;
+
+	@media ${device.laptop} {
+		max-width: 700px;
+		margin-bottom: 5em;
+	}
 `;
 const ModuleSection = styled.button`
 	display: flex;
@@ -135,8 +148,16 @@ const FirstSection = styled.div`
 
 const Id = styled.div`
 	font-size: 4em;
+
+	@media ${device.laptop} {
+		font-size: 5em;
+	}
 `;
-const Forum = styled.div``;
+const Forum = styled.div`
+	@media ${device.laptop} {
+		font-size: 1.2em;
+	}
+`;
 
 const SecondSection = styled.section`
 	text-align: left;
@@ -145,9 +166,17 @@ const SecondSection = styled.section`
 const Objectif = styled.div`
 	font-size: 1em;
 	color: var(--lightgrey);
+	@media ${device.laptop} {
+		font-size: 1.2em;
+	}
 `;
 
 const Titre = styled.div`
 	font-weight: 700;
 	font-size: 1.3em;
+
+	@media ${device.laptop} {
+		font-weight: 600;
+		font-size: 3em;
+	}
 `;

@@ -5,6 +5,7 @@ import { CircularProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { ImSphere, ImGift } from 'react-icons/im';
 import { FiClock } from 'react-icons/fi';
+import { device } from '../../components/MediaQueries';
 
 // components
 /* import LoginButton from '../../components/LoginButton';
@@ -45,7 +46,7 @@ const Programme = () => {
 					<Apropos>
 						<Introduction>
 							<p>
-								<Bold>À PROPOS DE CE PROGRAMME</Bold>
+								<Bold>À PROPOS DU PROGRAMME</Bold>
 							</p>
 							<p>
 								Il s'adresse aux<Bold> facilitatrices </Bold>et
@@ -149,6 +150,13 @@ const Wrapper = styled.section`
 	padding-left: 1em;
 	padding-right: 1em;
 	padding-bottom: 1em;
+
+	@media ${device.laptop} {
+		max-width: 1200px;
+		margin-top: 10em;
+		margin-bottom: 5em;
+		margin-left: 180px;
+	}
 `;
 const TitreSection = styled.section`
 	display: flex;
@@ -175,6 +183,9 @@ const Introduction = styled.p`
 	color: var(--lightgrey);
 	margin-bottom: 1em;
 	width: 343px;
+	@media ${device.laptop} {
+		width: 500px;
+	}
 `;
 
 const Bold = styled.span`
@@ -195,18 +206,21 @@ const Table = styled.section`
 
 	td {
 	}
+	@media ${device.laptop} {
+		margin-top: 45px;
+	}
 `;
 const ForumsSection = styled.section`
 	display: flex;
 	flex-direction: column;
-	gap: 1em;
+	gap: 2em;
 	margin-top: 1.5em;
 	margin-bottom: 1em;
 `;
 const ModuleSection = styled.button`
 	display: flex;
 	flex-direction: row;
-	gap: 1em;
+	gap: 2em;
 	align-items: flex-end;
 	background-color: var(--beige);
 	color: var(--darkgrey);
@@ -220,8 +234,15 @@ const FirstSection = styled.div`
 
 const Id = styled.div`
 	font-size: 6em;
+	@media ${device.laptop} {
+		font-size: 9em;
+	}
 `;
-const Forum = styled.div``;
+const Forum = styled.div`
+	@media ${device.laptop} {
+		font-size: 1.3em;
+	}
+`;
 
 const SecondSection = styled.section`
 	display: flex;
@@ -229,6 +250,9 @@ const SecondSection = styled.section`
 	justify-content: flex-start;
 	gap: 0.5em;
 	text-align: left;
+	@media ${device.laptop} {
+		width: 820px;
+	}
 `;
 
 const Question = styled.ul`
@@ -239,11 +263,17 @@ const Question = styled.ul`
 
 	li {
 	}
+	@media ${device.laptop} {
+		font-size: 1.3em;
+	}
 `;
 
 const Objectif = styled.div`
 	font-size: 1em;
 	color: var(--lightgrey);
+	@media ${device.laptop} {
+		font-size: 1.3em;
+	}
 `;
 
 const Titre = styled.div`

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import CommentThread from '../../components/Comment/CommentThread';
+import { device } from '../../components/MediaQueries';
 
 const Theme = () => {
 	const indicatorSize = 80;
@@ -137,10 +138,19 @@ const ThemeSection = styled.section`
 	margin-left: 1em;
 	margin-right: 1em;
 	margin-bottom: 1em;
+
+	@media ${device.laptop} {
+		margin-top: 9em;
+		margin-left: 200px;
+	}
 `;
 
 const ThemeWrapper = styled.div`
 	max-width: 344px;
+
+	@media ${device.laptop} {
+		max-width: 884px;
+	}
 `;
 const Section = styled.div`
 	margin-bottom: 1.2em;
@@ -176,6 +186,11 @@ const Form = styled.form`
 			border: 1px solid #fada80;
 			box-shadow: 0 0 10px #fada80;
 		}
+	}
+
+	@media ${device.laptop} {
+		margin-left: 518px;
+		width: 580px;
 	}
 `;
 

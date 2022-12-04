@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { device } from '../../components/MediaQueries';
 
 /* import 'draft-js/dist/Draft.css'; */
 /* import MyEditor from './Editor'; */
@@ -15,12 +16,13 @@ const CreateTheme = () => {
 	const [themesByID, setThemesbyId] = useState(null);
 	const [theme, setTheme] = useState('');
 	const [disableButton, setDisableButton] = useState(false);
+
 	const [themeInsertedId, setThemeInsertedId] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
+	/* 	const [isLoading, setIsLoading] = useState(false); */
 
 	useEffect(() => {}, [disableButton]);
 
-	useEffect(() => {
+	/* useEffect(() => {
 		fetch(`/themesbymodules/${lien}`)
 			.then((res) => res.json())
 			.then((data) => {
@@ -34,7 +36,20 @@ const CreateTheme = () => {
 
 	if (isLoading) {
 		return <div>Loading..</div>;
-	}
+	} */
+
+	useEffect(() => {
+		const loadThemesByModules = async () => {
+			await fetch(`/themesbymodules/${lien}`)
+				.then((response) => response.json())
+				.then((response) => {
+					setThemesbyId(response.result);
+					console.log(response.result);
+				})
+				.catch((err) => console.error(err));
+		};
+		loadThemesByModules();
+	}, [themeInsertedId, lien]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -77,7 +92,7 @@ const CreateTheme = () => {
 	/* return <MyEditor />; */
 
 	return (
-		<>
+		/* 	<>
 			{themesByID || themesByID === undefined ? (
 				<Form
 					onSubmit={(e) => {
@@ -99,18 +114,30 @@ const CreateTheme = () => {
 					</ButtonWrapper>
 				</Form>
 			) : (
-				<CircularProgress
-					size={indicatorSize}
-					sx={{
-						position: 'absolute',
-						top: '50%',
-						left: '50%',
-						marginTop: `${-indicatorSize / 2}px`,
-						marginLeft: `${-indicatorSize / 2}px`,
-						color: '#FADA80',
-					}}
-				/>
+				<div>isloading</div>
 			)}
+		</> */
+
+		<>
+			<Form
+				onSubmit={(e) => {
+					handleSubmit(e);
+				}}
+			>
+				<textarea
+					placeholder='Que voulez-vous dire?'
+					value={theme}
+					onChange={(e) => {
+						handleChange(e);
+					}}
+				></textarea>
+
+				<ButtonWrapper>
+					<Button type='submit' disabled={disableButton}>
+						PUBLIER
+					</Button>
+				</ButtonWrapper>
+			</Form>
 		</>
 	);
 };
@@ -132,6 +159,10 @@ const Form = styled.form`
 			border: 1px solid #fada80;
 			box-shadow: 0 0 10px #fada80;
 		}
+	}
+
+	@media ${device.laptop} {
+		width: 885px;
 	}
 `;
 

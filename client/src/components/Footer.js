@@ -125,6 +125,9 @@ const WrapperBlue = styled.div`
 	height: 420px;
 	background-color: #4083bb;
 	z-index: -1000;
+	@media ${device.laptop} {
+		height: 440px;
+	}
 `;
 
 const Wrapper = styled.section`
@@ -135,16 +138,16 @@ const Wrapper = styled.section`
 	flex-direction: column;
 	flex-wrap: wrap;
 
-	@media ${device.laptop} {
-		max-width: 1024px;
-		margin-left: 175px;
-	}
-
 	img {
 		position: absolute;
 		z-index: 0;
 		bottom: -30px;
 		right: 0;
+	}
+
+	@media ${device.laptop} {
+		max-width: 1100px;
+		margin-left: 175px;
 	}
 `;
 
@@ -152,7 +155,7 @@ const FirstSection = styled.section``;
 const SecondSection = styled.section`
 	@media ${device.laptop} {
 		img {
-			width: 500px;
+			width: 600px;
 		}
 	}
 `;
@@ -219,7 +222,6 @@ const Form = styled.form`
 		z-index: 1000;
 		border: none;
 		outline: none;
-		/* -webkit-transition: 0.5s; */
 		transition: 0.5s;
 		&:focus {
 			border: 3px solid var(--red);
@@ -228,6 +230,8 @@ const Form = styled.form`
 
 	@media ${device.laptop} {
 		padding-top: 217.6px;
+		margin-bottom: 3em;
+	}
 `;
 
 const Button = styled.button`

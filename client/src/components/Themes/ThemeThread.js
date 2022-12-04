@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { ThemeSection } from './ThemeSection';
+import { device } from '../../components/MediaQueries';
 
 const ThemeThread = () => {
 	const indicatorSize = 80;
@@ -153,6 +154,10 @@ export default ThemeThread;
 
 const Wrapper = styled.div`
 	max-width: 344px;
+
+	@media ${device.laptop} {
+		max-width: 885px;
+	}
 `;
 const Section = styled.div`
 	margin-bottom: 1.2em;
