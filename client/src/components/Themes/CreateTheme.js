@@ -38,17 +38,19 @@ const CreateTheme = () => {
 		return <div>Loading..</div>;
 	} */
 
+	const loadThemesByModules = async () => {
+		await fetch(`/themesbymodules/${lien}`)
+			.then((response) => response.json())
+			.then((response) => {
+				setThemesbyId(response.result);
+				console.log(response.result);
+			})
+			.catch((err) => console.error(err));
+	};
+
 	useEffect(() => {
-		const loadThemesByModules = async () => {
-			await fetch(`/themesbymodules/${lien}`)
-				.then((response) => response.json())
-				.then((response) => {
-					setThemesbyId(response.result);
-					console.log(response.result);
-				})
-				.catch((err) => console.error(err));
-		};
 		loadThemesByModules();
+		// maybe add some updates to themeInsertedId and themesByID if needed
 	}, [themeInsertedId, themesByID, lien]);
 
 	const handleSubmit = (e) => {
